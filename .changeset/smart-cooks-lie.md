@@ -1,5 +1,5 @@
 ---
-"@dynamix-layout/core": minor
+"@dynamix-layout/core": patch
 "tsconfig": patch
 ---
 
