@@ -4,5 +4,7 @@
   "initialVersions": {
     "@dynamix-layout/core": "0.0.1"
   },
-  "changesets": []
+  "changesets": [
+    "smart-cooks-lie"
+  ]
 }
