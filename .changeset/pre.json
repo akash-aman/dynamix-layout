@@ -1,0 +1,9 @@
+{
+  "mode": "pre",
+  "tag": "beta",
+  "initialVersions": {
+    "@dynamix-layout/core": "0.0.1",
+    "tsconfig": "0.0.1"
+  },
+  "changesets": []
+}

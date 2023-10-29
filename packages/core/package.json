@@ -1,0 +1,45 @@
+{
+  "name": "@dynamix-layout/core",
+  "version": "0.0.1",
+  "description": "Dynamix Layout/Core is a JavaScript package for creating dynamic layouts with ease.",
+  "main": "dist/core.js",
+  "module": "dist/core.mjs",
+  "browser": "dist/core.iife.js",
+  "types": "dist/types/index.d.ts",
+  "typings": "dist/types/index.d.ts",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite"
+  },
+  "funding": {
+    "type": "patreon",
+    "url": "https://www.patreon.com/Akash960"
+  },
+  "files": [
+    "src",
+    "dist",
+    "LICENSE",
+    "CHANGELOG.md",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akash-aman/dynamix-layout.git"
+  },
+  "keywords": [
+    "dynamix-layout",
+    "ui",
+    "ux"
+  ],
+  "author": "Akash Aman",
+  "license": "MIT",
+  "devDependencies": {
+    "@changesets/cli": "^2.26.2",
+    "typescript": "^5.2.2",
+    "vite": "^4.4.9"
+  },
+  "dependencies": {
+    "@rollup/plugin-typescript": "^11.1.3",
+    "tslib": "^2.6.2"
+  }
+}

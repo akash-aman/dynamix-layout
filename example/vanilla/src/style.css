@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  height: calc(100vh - 16px);
+  width: calc(100% - 16px);
+  margin: 8px;
+  position: relative;
+}
+
+.tab {
+  border-radius: 10px;
+  background-color: rgb(238, 238, 238);
+}
+
+.hover-tab{
+	position: absolute;
+  z-index: 1;
+	background-color: rgba(0, 110, 255, 0.244);
+	justify-content: center;
+	align-items: center;
+	/* border: 5px solid rgba(1, 111, 255, 0.83); */
+	transition: all 0.1s ease;
+  border-radius: 10px;
+	box-sizing: border-box;
+
+}

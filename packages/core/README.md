@@ -1,4 +1,4 @@
-# Dynamix Layout/Core Package Documentation
+# Dynamix Layout/Core
 
 ![Dynamix Layout Logo](https://raw.githubusercontent.com/akash-aman/dynamix-layout/main/packages/core/assets/view.gif)
 
