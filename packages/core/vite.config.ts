@@ -1,27 +1,21 @@
 import { defineConfig } from 'vite';
-import path from 'path'
-import typescript from '@rollup/plugin-typescript';
-//const resolvePath = (str: string) => path.resolve(__dirname, str)
+import { resolve } from 'path';
+import dts from 'vite-plugin-dts';
 
 export default defineConfig({
   build: {
+    sourcemap: 'inline',
     lib: {
-      entry: 'src/index.ts',
-      name: 'layout',
-	  formats: ['cjs', 'es', 'iife','umd'],
-    },
-    rollupOptions: {
-      // Customize rollup options as needed.
-	  plugins: [
-		typescript({
-			target: 'es2020',
-			rootDir: path.resolve('./src'), // Use 'path.resolve' to define the rootDir.
-			declaration: true,
-			declarationDir: path.resolve('./dist/types'), // Use 'path.resolve' for declarationDir.
-			exclude: /node_modules/,
-			allowSyntheticDefaultImports: true,
-		  }),
-	  ]
+      entry: resolve(__dirname, 'src/index.ts'),
+      name: 'dynamix.layout.core',
+      fileName: (format) => `core.${format}.js`,
+      formats: ['cjs', 'es', 'iife', 'umd'],
     },
   },
+  plugins: [
+    dts({
+      outDir: 'dist/types',
+      exclude: ['node_modules/**'],
+    }),
+  ],
 });
