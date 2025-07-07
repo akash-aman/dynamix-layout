@@ -2,26 +2,44 @@
   "name": "@dynamix-layout/core",
   "version": "0.0.2-beta.0",
   "description": "Dynamix Layout/Core is a JavaScript package for creating dynamic layouts with ease.",
+  "keywords": [
+    "dynamix-layout",
+    "ui",
+    "ux"
+  ],
+  "author": "Akash Aman <sir.akashaman@gmail.com> (https://akash.cx)",
+  "license": "MIT",
+  "funding": [
+    {
+      "type": "patreon",
+      "url": "https://www.patreon.com/akashaman"
+    },
+    {
+      "type": "buymeacoffee",
+      "url": "https://www.buymeacoffee.com/akashaman"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akash-aman/dynamix-layout.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/akash-aman/dynamix-layout/issues"
+  },
+  "homepage": "https://github.com/akash-aman/dynamix-layout#readme",
+
   "main": "dist/core.cjs.js",
   "module": "dist/core.es.js",
   "browser": "dist/core.iife.js",
   "types": "dist/types/index.d.ts",
   "typings": "dist/types/index.d.ts",
-  "type": "module",
   "exports": {
     ".": {
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/core.es.js",
-      "require": "./dist/core.cjs.js",
-      "types": "./dist/types/index.d.ts"
+      "require": "./dist/core.cjs.js"
     }
-  },
-  "scripts": {
-    "build": "vite build",
-    "dev": "vite"
-  },
-  "funding": {
-    "type": "patreon",
-    "url": "https://www.patreon.com/Akash960"
   },
   "files": [
     "src",
@@ -30,24 +48,29 @@
     "CHANGELOG.md",
     "README.md"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/akash-aman/dynamix-layout.git"
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
   },
-  "keywords": [
-    "dynamix-layout",
-    "ui",
-    "ux"
-  ],
-  "author": "Akash Aman",
-  "license": "MIT",
+
+  "type": "module",
+  "engines": {
+    "node": ">=22.16.0"
+  },
+
+  "scripts": {
+    "dev": "vite build --watch",
+    "debug": "vite --debug",
+    "clean": "rm -rf dist",
+    "build": "pnpm run clean && vite build && cp ../../LICENSE dist/LICENSE",
+    "dev:local": "vite",
+    "preview": "vite preview",
+    "test": "vitest"
+  },
+
   "devDependencies": {
     "@changesets/cli": "^2.29.5",
     "typescript": "^5.8.3",
     "vite": "^7.0.2"
-  },
-  "dependencies": {
-    "@rollup/plugin-typescript": "^12.1.4",
-    "tslib": "^2.8.1"
   }
 }
