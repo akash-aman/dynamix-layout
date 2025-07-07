@@ -1,9 +1,9 @@
-import { defineConfig } from 'vitest/config';
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
-  test: {
-    name: 'core',
-    environment: 'node',
-    globals: true,
-  },
-});
+	test: {
+		name: 'core',
+		environment: 'node',
+		globals: true,
+	},
+})
