@@ -2,7 +2,7 @@
   "mode": "exit",
   "tag": "beta",
   "initialVersions": {
-    "@dynamix-layout/core": "0.0.3"
+    "@dynamix-layout/core": "0.0.4"
   },
   "changesets": []
 }
