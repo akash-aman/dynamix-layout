@@ -1,5 +1,17 @@
 # @dynamix-layout/core
 
+## 0.0.4
+
+### Patch Changes
+
+- [#17](https://github.com/akash-aman/dynamix-layout/pull/17) [`70f3483`](https://github.com/akash-aman/dynamix-layout/commit/70f3483dd634f3c46b539fc8900b91a4913993ed) Thanks [@akash-aman](https://github.com/akash-aman)! - Refactored layout core and added unit tests for reactive state and layout logic
+    - Replaced legacy `Layout` class with modular utilities: `Queue` and `createReactiveState`.
+    - Improved layout shifting algorithm (`shiftTree`) and bond-based slider behavior.
+    - Added comprehensive unit tests for layout validation, tree integrity, and reactive state handling.
+    - Simplified exports and cleaned up `index.ts`, `.gitignore`, and `package.json` structure.
+    - Refactored `vite.config.ts`, `tsconfig.json`, and `vitest.config.ts` for clarity and consistency.
+    - Added license metadata to Vite config and updated author name in LICENSE.
+
 ## 0.0.3
 
 ### Patch Changes
