@@ -1,0 +1,39 @@
+.xterm-viewport,
+.hide-scrollbar {
+  /* Enable scrolling */
+  overflow: auto;
+
+  /* --- Hide scrollbar for different browsers --- */
+
+  /* Firefox */
+  scrollbar-width: none;
+
+  /* Internet Explorer and Edge */
+  -ms-overflow-style: none;
+}
+
+/* Chrome, Safari, and Opera */
+.hide-scrollbar::-webkit-scrollbar,
+.xterm-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+body {
+  height: 100vh;
+  width: 100%;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+.xterm-screen, .terminal.xterm.xterm-dom-renderer-owner-1 {
+  height: 100% !important;
+}
+
+.monaco-editor {
+  outline: none !important;
+}
