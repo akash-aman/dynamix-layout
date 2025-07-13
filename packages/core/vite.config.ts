@@ -2,6 +2,9 @@ import { defineConfig } from 'vite'
 import { resolve } from 'path'
 import dts from 'vite-plugin-dts'
 import fs from 'fs'
+import { visualizer } from 'rollup-plugin-visualizer'
+import { compression, defineAlgorithm } from 'vite-plugin-compression2'
+import stripComments from 'vite-plugin-strip-comments'
 
 const license = fs.readFileSync(resolve(__dirname, '../../LICENSE'), 'utf-8')
 
@@ -10,7 +13,7 @@ export default defineConfig({
 		__LICENSE__: JSON.stringify(license),
 	},
 	build: {
-		sourcemap: 'inline',
+		sourcemap: 'hidden',
 		lib: {
 			entry: resolve(__dirname, 'src/index.ts'),
 			name: 'dynamix.layout.core',
@@ -23,5 +26,19 @@ export default defineConfig({
 			outDir: 'dist/types',
 			exclude: ['node_modules/**'],
 		}),
+		visualizer({
+			filename: 'core.html',
+			gzipSize: true,
+			brotliSize: true,
+			template: 'treemap',
+		}),
+		compression({
+			algorithms: [
+				'gzip',
+				'brotliCompress',
+				defineAlgorithm('deflate', { level: 9 }),
+			],
+		}),
+		stripComments({ type: 'none' }),
 	],
 })

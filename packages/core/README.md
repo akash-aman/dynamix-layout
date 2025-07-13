@@ -1,3 +1,4 @@
+
 <div align="center">
 
 [![Patreon](https://img.shields.io/badge/Patreon-Support-F96854?style=for-the-badge&logo=patreon)](https://www.patreon.com/akashaman)
@@ -6,11 +7,10 @@
 
 </div>
 
-## 🚀 @dynamix-layout/core
+# 🚀 @dynamix-layout/core
 
 ## Overview
-
-**Dynamix Layout/Updates** is the engine that powers the creation, management, and dynamic modification of your layout structures. It handles the internal logic of the layout tree, including node creation, dimension calculation, and state updates. This package works with a hierarchical tree structure composed of `Node` objects, which represent rows, tabsets, and tabs.
+**@dynamix-layout/core** is the **engine** that powers the **creation**, **management**, and **dynamic modification** of your layout structures. It handles the **internal logic** of the layout tree, including **node creation**, **dimension calculation**, and **state updates**. This package works with a **hierarchical tree structure** composed of `Node` objects and exposes a **reactive state** for seamless integration with modern UI frameworks.
 
 ---
 
@@ -20,169 +20,177 @@
 
 ## Core Classes
 
-The package is built around three primary classes: `Layout`, `Node`, and `Bond`.
+The package is built around three primary classes: `DynamixLayoutCore`, `Node`, and `Bond`.
 
-1. **`Layout`**: The main controller class that you instantiate to create and manage the entire layout.
-2. **`Node`**: The fundamental building block of the layout tree. Each `Node` can be a `row`, a `tabset`, or a `tab`.
-3. **`Bond`**: A special object that represents the draggable separator between two nodes, allowing for resizing.
+1.  **`DynamixLayoutCore`**: The main controller class that you instantiate to create and manage the entire layout. It serves as the primary public API.
+2.  **`Node`**: The fundamental building block of the layout tree. Each `Node` can be a `row`, a `tabset`, or a `tab`.
+3.  **`Bond`**: A special object that represents the draggable separator between two nodes, allowing for resizing.
 
 ---
 
-## `Layout` Class
+## `DynamixLayoutCore` Class
 
-The `Layout` class is the central point of control for your entire layout configuration.
+The `DynamixLayoutCore` class is the central point of control for your entire layout configuration.
 
 ### Constructor
 
-When initializing the `Layout` class, you can provide the following parameters:
+When initializing the `DynamixLayoutCore` class, you provide a single **options object**.
 
-- **`tabs`** _(Array\<string\>)_: An array of tab names (strings) to generate an initial binary tree layout. Defaults to `[]`.
-- **`tree`** _(LayoutTree | null)_: A serialized JSON representation of a previously saved layout (`LayoutTree` object). If provided, it will recreate that specific layout. Defaults to `null`.
-- **`minW`** _(Number)_: The minimum width for a `tabset`. Defaults to `40`.
-- **`minH`** _(Number)_: The minimum height for a `tabset`. Defaults to `40`.
-- **`bond`** _(Number)_: The width or height (in pixels) of the draggable separator (`Bond`) between nodes. Defaults to `10`.
+`new DynamixLayoutCore(options)`
+
+-   **`options`** (`object`): An object containing configuration properties.
+    -   **`tabs`** (`string[]`): An array of tab names to generate an initial binary tree layout. Defaults to `[]`.
+    -   **`tree`** (`LayoutTree | null`): A serialized JSON representation of a previously saved layout (`LayoutTree` object). If provided, it will recreate that specific layout. Defaults to `null`.
+    -   **`tabsIds`** (`Map<string, string>`): A map where keys are tab names and values are their unique IDs. This is useful for persisting tab identities across sessions.
+    -   **`minW`** (`number`): The minimum width for a `tabset`. Defaults to `40`.
+    -   **`minH`** (`number`): The minimum height for a `tabset`. Defaults to `40`.
+    -   **`bond`** (`number`): The width or height (in pixels) of the draggable separator (`Bond`) between nodes. Defaults to `10`.
+
+### Reactive Properties
+
+The layout's state is exposed through static reactive properties on the `Node` class. You can subscribe to these to drive your UI.
+
+-   **`Node.cache.nodOpts`**: A reactive map of all `tabset` nodes and their options.
+-   **`Node.cache.bndOpts`**: A reactive map of all `bond` objects.
+-   **`Node.cache.tabOpts`**: A reactive map of all `tab` nodes within their respective tabsets.
 
 ### Methods
 
-#### 🌳 `updateTree(srcId, destId, layout)`
+#### 🌳 `updateTree(src, des, layout)`
 
-This is the core method for rearranging the layout. It moves a source node (`srcId`) to a new position relative to a destination node (`destId`).
+This is the core method for rearranging the layout. It moves a source node (`src`) to a new position relative to a destination node (`des`).
 
-- **`srcId`** _(string)_: The unique ID of the node to move.
-- **`destId`** _(string)_: The unique ID of the destination node.
-- **`layout`** _('top' | 'bottom' | 'left' | 'right' | 'contain')_: A string specifying how the source should be placed relative to the destination.
-    - `top`, `bottom`, `left`, `right`: Places the source node in a new split area above, below, to the left, or to the right of the destination.
-    - `contain`: Places the source node as a new tab within the same `tabset` as the destination node.
+-   **`src`** (`string`): The unique ID of the node to move (can be a `tab` or a `tabset`).
+-   **`des`** (`string`): The unique ID of the destination node.
+-   **`layout`** (`'top' | 'bottom' | 'left' | 'right' | 'contain'`): Specifies how the source should be placed relative to the destination.
+    -   `top`, `bottom`, `left`, `right`: Places the source node by splitting the destination area.
+    -   `contain`: Places a source `tab` into the destination `tabset`.
 
 **Returns**: `boolean` - `true` if the update was successful, `false` otherwise.
 
-Example:
-
 ```javascript
-// Moves the 'sidebar' tab to be to the left of the 'main-content' tabset
-layout.updateTree('sidebar-id', 'main-content-id', 'left')
+// Moves the node with 'sidebar-id' to be to the left of 'main-content-id'
+layout.updateTree('sidebar-id', 'main-content-id', 'left');
 ```
 
----
+-----
 
-#### 📏 `updateDimension(dimension, disableTimeout, timeout)`
+#### 📏 `updateDimension(dim, disableTimeout, timeout)`
 
 Recalculates all node dimensions within the layout, typically after the main container has been resized.
 
-- **`dimension`** _({ w, h, x, y })_: An object representing the new dimensions and position of the root container.
-- **`disableTimeout`** _(boolean)_: If `true`, the update runs instantly. Otherwise, it's debounced to improve performance. Defaults to `false`.
-- **`timeout`** _(number)_: The debounce delay in milliseconds. Defaults to `2`.
+  - **`dim`** (`{ w, h, x, y }`): An object representing the new dimensions of the root container.
+  - **`disableTimeout`** (`boolean`): If `true`, the update runs instantly. Otherwise, it's debounced. Defaults to `false`.
+  - **`timeout`** (`number`): The debounce delay in milliseconds. Defaults to `2`.
 
-Example:
+<!-- end list -->
 
 ```javascript
 // On window resize, update the layout dimensions
 layout.updateDimension({
-	w: window.innerWidth,
-	h: window.innerHeight,
-	x: 0,
-	y: 0,
-})
+  w: window.innerWidth,
+  h: window.innerHeight,
+  x: 0,
+  y: 0,
+});
 ```
 
----
+-----
 
-#### ↔️ `updateSlider(id, dimension, disableTimeout, timeout)`
+#### ↔️ `updateSlider(id, dim, disableTimeout, timeout)`
 
-Updates the layout in response to a user dragging a `Bond` (slider). This recalculates the `part` (percentage share of space) for the adjacent nodes.
+Updates the layout in response to a user dragging a `Bond` (slider).
 
-- **`id`** _(string)_: The unique ID of the `Bond` being moved.
-- **`dimension`** _({ x, y })_: An object with the new `x` and `y` coordinates of the slider.
-- **`disableTimeout`** _(boolean)_: If `true`, the update runs instantly. Defaults to `false`.
-- **`timeout`** _(number)_: The debounce delay in milliseconds. Defaults to `2`.
+  - **`id`** (`string`): The unique ID of the `Bond` being moved.
+  - **`dim`** (`{ x, y }`): An object with the new coordinates of the slider.
+  - **`disableTimeout`** (`boolean`): If `true`, the update runs instantly. Defaults to `false`.
+  - **`timeout`** (`number`): The debounce delay in milliseconds. Defaults to `2`.
 
-Example:
+<!-- end list -->
 
 ```javascript
 // When a user drags a separator
-layout.updateSlider('bond-123', { x: 450, y: 300 })
+layout.updateSlider('bond-123', { x: 450, y: 300 });
 ```
 
----
+-----
 
 #### 🗑️ `clearAllCache()`
 
 Clears all internal caches for nodes, bonds, dimensions, and other layout data. Use this when completely destroying or resetting the layout.
 
-Example:
-
 ```javascript
-layout.clearAllCache()
+layout.clearAllCache();
 ```
 
----
+-----
 
 ## `Node` Class
 
-The `Node` represents a single element in the layout tree.
+The `Node` represents a single element in the layout tree. You will typically interact with Node data through the reactive properties rather than manipulating `Node` objects directly.
 
-### Node Properties
+### Constructor
 
-- **`type`** _('row' | 'tabset' | 'tab')_: Defines the node's function.
-    - `row`: A container that organizes its children horizontally or vertically.
-    - `tabset`: A container that holds one or more `tab` nodes and displays one at a time.
-    - `tab`: The final content node, which is hosted inside a `tabset`.
-- **`unId`** _(string)_: A unique identifier for the node.
-- **`host`** _(Node | null)_: A reference to the parent `Node`.
-- **`kids`** _(Queue\<Node\>)_: A queue of child `Node` objects.
-- **`part`** _(number)_: The percentage of space the node occupies within its host `row`.
-- **`dims`** _(Dimension)_: The calculated dimensions (`w`, `h`, `x`, `y`) of the node.
+`new Node(options)`
+
+  - **`options`** (`object`): An object containing node properties like `type`, `host`, `name`, `part`, `dims`, `unId`, and `open`.
 
 ### Static Cache (`Node.cache`)
 
-The `Node` class contains a static `cache` object. This centralized cache holds the state for the entire layout, including maps of all nodes, bonds, dimensions, and reactive options. Direct manipulation of the cache is not recommended.
+The `Node` class contains a static `cache` object. This centralized cache holds the state for the entire layout, including maps of all nodes, dimensions, and the **reactive options** that your UI will consume. **Direct manipulation of the cache is not recommended.**
 
 ### Methods
 
 #### 💾 `toJSON()`
 
-Serializes the node and its entire subtree into a JSON object (`LayoutTree`). This is used to save the current state of the layout, which can be passed back into the `Layout` constructor to restore it later.
-
-Example:
+Serializes the node and its entire subtree into a JSON object (`LayoutTree`). This is used to save the current state of the layout.
 
 ```javascript
-const rootNode = layout._root
-const layoutJSON = rootNode.toJSON()
+const rootNode = DynamixLayoutCore._root; // Access the static root node
+const layoutJSON = rootNode.toJSON();
 // localStorage.setItem('savedLayout', JSON.stringify(layoutJSON));
 ```
 
 ## Example Usage
 
 ```javascript
+import { DynamixLayoutCore, Node } from '@dynamix-layout/core';
+
 // 1. Initialize the Layout class
-// You can either provide a list of tabs to auto-generate a layout...
-const layout = new Layout(['editor', 'terminal', 'preview']);
+// Provide an options object to the constructor
+const layout = new DynamixLayoutCore({ 
+  tabs: ['editor', 'terminal', 'preview'] 
+});
 
 // ...or restore a layout from a saved JSON object
 // const savedLayout = JSON.parse(localStorage.getItem('savedLayout'));
-// const layout = new Layout([], savedLayout);
+// const layout = new DynamixLayoutCore({ tree: savedLayout });
 
 // 2. Set the initial dimensions of your container
 layout.updateDimension({ w: 1200, h: 800, x: 0, y: 0 }, true);
 
-// 3. To listen for layout changes, you can subscribe to the reactive options
-// This is an advanced use case for UI frameworks
-// layout.nodeOps.subscribe(nodeOptionsMap => {
-//   console.log('Layout updated!', nodeOptionsMap);
-// });
+// 3. Subscribe to reactive state to render your UI.
+const unsubscribe = Node.cache.nodOpts.subscribe(nodeOptionsMap => {
+  console.log('Layout updated!', nodeOptionsMap);
+  // Your UI rendering logic here...
+});
 
 // 4. Move a tab to a new location
-// For example, move the 'terminal' tab to be below the 'editor' tab
+// (In a real app, you'd get these IDs from the reactive state)
 setTimeout(() => {
-  const terminalNodeId = /* get terminal node id from layout.nodeOps */;
-  const editorNodeId = /* get editor node id */;
-  if (terminalNodeId && editorNodeId) {
-    layout.updateTree(terminalNodeId, editorNodeId, 'bottom');
-  }
+    const terminalTabId = 'some-unique-id-for-terminal-tab'; 
+    const editorTabsetId = 'some-unique-id-for-editor-tabset';
+    
+    // Move the terminal tab into the editor's tabset
+    layout.updateTree(terminalTabId, editorTabsetId, 'contain');
 }, 2000);
+
+// 5. Clean up when the component unmounts
+// unsubscribe();
+// layout.clearAllCache();
 ```
 
----
+-----
 
 <div align="center">
 

@@ -12,17 +12,16 @@ export interface NodeCache {
 	dimMins: Map<string, { minWidth: number; minHeight: number }>
 	mapDirs: Map<string, boolean>
 	tabCnts: Map<string, { horizontal: number; vertical: number }>
-	mapNode: Map<string, Node>
-	tabsets: Map<string, Node>
-	mapTabs: Map<string, Node>
-	mapBond: Map<string, Bond>
-	mapKids: Map<string, Queue<Node>>
+	mapElem: Map<string, Node | Bond>
 	nodOpts: ReactiveValue<Map<string, NodeOptions>>
 	bndOpts: ReactiveValue<Map<string, NodeOptions>>
+	tabOpts: ReactiveValue<Map<string, NodeOptions>>
 }
 
 export type NodeType = 'row' | 'tabset' | 'tab'
 export type NodeTypeWithBond = NodeType | 'bond'
+
+export type TabsIds = Map<string, string>
 
 export interface BaseNode {
 	typNode: NodeTypeWithBond
@@ -31,7 +30,7 @@ export interface BaseNode {
 	nodPart: number
 	nodeDir: boolean
 	nodDims: Dimension
-	nodOpen?: string
+	nodOpen?: string | boolean
 }
 
 export type LayoutTree = Omit<BaseNode, 'nodeDir' | 'nodDims'> & {
@@ -52,7 +51,7 @@ export type ChangeListener<T> = (newValue: T) => void
 
 export interface ReactiveValue<T> {
 	get: () => T
-	set: (newValue: T) => void
+	set: (newValue: T, flag?: boolean) => void
 	onChange: (listener: ChangeListener<T>) => () => void
 	nextChange: () => Promise<T>
 	onChangePromise: (listener: ChangeListener<T>) => () => void

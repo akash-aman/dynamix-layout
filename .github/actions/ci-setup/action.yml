@@ -1,4 +1,5 @@
 name: 'CI setup'
+description: 'Sets up the CI environment with Node.js, pnpm, and dependencies'
 runs:
   using: 'composite'
   steps:

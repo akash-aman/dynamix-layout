@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { Layout, LayoutTree, NodeTypeWithBond } from '../src'
+import { DynamixLayoutCore, LayoutTree, NodeTypeWithBond } from '../src'
 import { assertNodeTreeIsValid } from './utils/test.utils'
 
 /**
@@ -50,16 +50,16 @@ const getNodesFromTree = (
 
 describe('Dynamic Layout Management Test Suite', () => {
 	beforeEach(() => {
-		const layout = new Layout([])
+		const layout = new DynamixLayoutCore()
 		layout.clearAllCache()
 	})
 
 	describe('Layout Initialization', () => {
 		it('should create a valid layout structure from tabs list', () => {
 			const tabs = ['dashboard', 'profile', 'settings']
-			const layoutInstance = new Layout(tabs)
-			expect(layoutInstance).toBeInstanceOf(Layout)
-			expect(() => assertNodeTreeIsValid(Layout._root)).not.toThrow()
+			const layoutInstance = new DynamixLayoutCore({ tabs })
+			expect(layoutInstance).toBeInstanceOf(DynamixLayoutCore)
+			expect(() => assertNodeTreeIsValid(DynamixLayoutCore._root)).not.toThrow()
 		})
 	})
 
@@ -97,8 +97,10 @@ describe('Dynamic Layout Management Test Suite', () => {
 		for (let i = 0; i < tabs.length; i++) {
 			const subsetTabs = tabs.slice(0, i + 1)
 			tabsets.push(subsetTabs)
-			new Layout(subsetTabs)
-			layouts.push(Layout._root.toJSON())
+			new DynamixLayoutCore({
+				tabs: subsetTabs,
+			})
+			layouts.push(DynamixLayoutCore._root.toJSON())
 		}
 
 		for (let i = 0; i < layouts.length; i++) {
@@ -113,7 +115,7 @@ describe('Dynamic Layout Management Test Suite', () => {
 					(n) =>
 						n.type === 'tab' ||
 						n.type === 'tabset' ||
-						n.id === 'root'
+						n.id === 'dynamix-layout-root'
 				)
 				const positions: (
 					| 'top'
@@ -129,9 +131,10 @@ describe('Dynamic Layout Management Test Suite', () => {
 							if (srcNode.id === desNode.id) continue
 
 							it(`should handle ${srcNode.type} '${srcNode.id}' moving to '${position}' of ${desNode.type} '${desNode.id}'`, () => {
-								const testInstance = new Layout(
-									[],
-									initialLayoutTree
+								const testInstance = new DynamixLayoutCore(
+									{
+										tree: initialLayoutTree,
+									}
 								)
 								const moveSucceeded = testInstance.updateTree(
 									srcNode.id,
@@ -141,7 +144,7 @@ describe('Dynamic Layout Management Test Suite', () => {
 
 								if (moveSucceeded) {
 									expect(() =>
-										assertNodeTreeIsValid(Layout._root)
+										assertNodeTreeIsValid(DynamixLayoutCore._root)
 									).not.toThrow()
 								} else {
 									expect(moveSucceeded).toBe(false)

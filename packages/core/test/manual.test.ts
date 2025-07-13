@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { Layout, LayoutTree, Node, Queue } from '../src'
+import { DynamixLayoutCore, LayoutTree, Node, Queue } from '../src'
 
 /**
  * Yields all nodes in the layout tree using breadth-first traversal
@@ -29,7 +29,7 @@ function* nodeLayoutIterator(root: Node): Generator<Node> {
  * @param node - Root node to validate (defaults to Layout._root)
  * @returns true if tree structure is valid, false otherwise
  */
-const validateTree = (node: Node = Layout._root): boolean => {
+const validateTree = (node: Node = DynamixLayoutCore._root): boolean => {
 	let isValid = true
 	const allNodes = Array.from(nodeLayoutIterator(node))
 
@@ -41,7 +41,7 @@ const validateTree = (node: Node = Layout._root): boolean => {
 		console.groupCollapsed(`Checking ${id}`)
 
 		// Validate parent-child host relationship
-		if (currentNode !== Layout._root) {
+		if (currentNode !== DynamixLayoutCore._root) {
 			if (!currentNode.host) {
 				console.error(`❌ ORPHANED: ${id} has a null host.`)
 				nodeIsValid = false
@@ -64,7 +64,7 @@ const validateTree = (node: Node = Layout._root): boolean => {
 		}
 
 		// Validate layout direction
-		if (currentNode !== Layout._root && currentNode.host) {
+		if (currentNode !== DynamixLayoutCore._root && currentNode.host) {
 			const parentDir = Node.cache.mapDirs.get(currentNode.host.unId)
 			const currentDir = Node.cache.mapDirs.get(currentNode.unId)
 
@@ -171,8 +171,8 @@ describe('Comprehensive Move Test Suite', () => {
 	const initialLayoutTree: LayoutTree = {
 		typNode: 'row',
 		nodPart: 100,
-		nodName: 'root',
-		uidNode: 'root',
+		nodName: 'dynamix-layout-root',
+		uidNode: 'dynamix-layout-root',
 		nodKids: [
 			{
 				typNode: 'tabset',
@@ -307,11 +307,11 @@ describe('Comprehensive Move Test Suite', () => {
 		],
 	}
 
-	let layout: Layout
+	let layout: DynamixLayoutCore
 
 	beforeEach(() => {
 		const layoutTreeCopy = JSON.parse(JSON.stringify(initialLayoutTree))
-		layout = new Layout([], layoutTreeCopy)
+		layout = new DynamixLayoutCore({tree:layoutTreeCopy})
 	})
 
 	describe('Splitting Panels', () => {
@@ -416,7 +416,7 @@ describe('Comprehensive Move Test Suite', () => {
 		it('should move to root (bottom)', () => {
 			const success = layout.updateTree(
 				'd7586e7b-9735-4745-b6ac-bf739686db79',
-				'root',
+				'dynamix-layout-root',
 				'bottom'
 			)
 
@@ -433,7 +433,7 @@ describe('Comprehensive Move Test Suite', () => {
 		it('should detect invalid tree structure', () => {
 			const success = layout.updateTree(
 				'd7586e7b-9735-4745-b6ac-bf739686db79',
-				'root',
+				'dynamix-layout-root',
 				'bottom'
 			)
 

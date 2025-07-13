@@ -1,7 +1,16 @@
 name: 'CI checks'
+description: 'Runs CI checks for the project'
 runs:
   using: 'composite'
   steps:
+    - name: Lint
+      run: pnpm run lint
+      shell: bash
+
+    - name: Test
+      run: pnpm run test
+      shell: bash
+      
     - name: Build
       run: pnpm run build
       shell: bash
