@@ -1,0 +1,95 @@
+{
+	"name": "@dynamix-layout/react",
+	"version": "0.0.0",
+	"description": "A powerful React component for creating dynamic, resizable, and draggable layouts.",
+	"keywords": [
+		"react",
+		"layout",
+		"resizable",
+		"draggable",
+		"split-layout",
+		"tabs",
+		"dynamic-layout",
+		"react-layout",
+		"react-component"
+	],
+	"author": "Akash Aman <sir.akashaman@gmail.com> (https://akash.cx)",
+	"license": "MIT",
+	"funding": [
+		{
+			"type": "patreon",
+			"url": "https://www.patreon.com/akashaman"
+		},
+		{
+			"type": "buymeacoffee",
+			"url": "https://www.buymeacoffee.com/akashaman"
+		}
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/akashaman/dynamix-layout",
+		"directory": "packages/react"
+	},
+	"bugs": {
+		"url": "https://github.com/akashaman/dynamix-layout/issues"
+	},
+	"homepage": "https://github.com/akashaman/dynamix-layout#readme",
+	"main": "./dist/index.cjs.js",
+	"module": "./dist/index.es.js",
+	"types": "./dist/types/index.d.ts",
+	"typings": "./dist/types/index.d.ts",
+	"style": "./dist/index.css",
+	"exports": {
+		".": {
+			"types": "./dist/types/index.d.ts",
+			"import": "./dist/index.es.js",
+			"require": "./dist/index.cjs.js"
+		},
+		"./style.css": "./dist/style.css"
+	},
+	"files": [
+		"dist",
+		"LICENSE",
+		"CHANGELOG.md",
+		"README.md",
+		"!**/*.map"
+	],
+	"sideEffects": [
+		"./dist/index.css"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"type": "module",
+	"engines": {
+		"node": ">=22.16.0"
+	},
+	"scripts": {
+		"dev": "vite build --watch",
+		"debug": "vite --debug",
+		"clean": "rm -rf dist",
+		"build": "pnpm run clean && vite build && cp ../../LICENSE dist/LICENSE",
+		"dev:local": "vite",
+		"preview": "vite preview",
+		"lint": "eslint . --ext ts,tsx"
+	},
+	"dependencies": {
+		"@dynamix-layout/core": "workspace:*"
+	},
+	"peerDependencies": {
+		"react": "^17.0.0 || ^18.0.0 || ^19.0.0",
+		"react-dom": "^17.0.0 || ^18.0.0 || ^19.0.0"
+	},
+	"devDependencies": {
+		"@repo/eslint-config": "workspace:*",
+		"@repo/typescript-config": "workspace:*",
+		"@types/react": "^19.1.8",
+		"@types/react-dom": "^19.1.6",
+		"react": "^19.1.0",
+		"react-dom": "^19.1.0",
+		"typescript": "^5.8.3",
+		"vite": "^7.0.4",
+		"vite-plugin-dts": "^4.5.4",
+		"vite-plugin-lib-inject-css": "^2.2.2"
+	}
+}

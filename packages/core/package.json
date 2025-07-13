@@ -44,7 +44,8 @@
 		"dist",
 		"LICENSE",
 		"CHANGELOG.md",
-		"README.md"
+		"README.md",
+		"!**/*.map"
 	],
 	"sideEffects": false,
 	"publishConfig": {

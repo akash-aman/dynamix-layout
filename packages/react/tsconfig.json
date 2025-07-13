@@ -1,0 +1,32 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"lib": ["DOM", "ESNext"],
+		"jsx": "react-jsx",
+		"strict": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"declaration": true,
+		"outDir": "./dist/types",
+		"moduleResolution": "Node",
+		"rootDir": "src",
+		"allowSyntheticDefaultImports": true,
+		"noImplicitAny": true,
+		"paths": {
+			"@dynamix-layout/core": ["../core/src"],
+			"@dynamix-layout/core/*": ["../core/src/*"]
+		},
+		"baseUrl": ".",
+		"types": [
+			"vitest/globals",
+			"@testing-library/jest-dom",
+			"@testing-library/react"
+		],
+		"composite": true
+	},
+	"include": ["src/**/*", "src/types/**/*"],
+	"exclude": ["node_modules"],
+	"references": [{ "path": "../core" }]
+}

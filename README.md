@@ -1,109 +1,162 @@
-# Dynamix Layout/Core Package Documentation
+<div align="center">
 
-![Dynamix Layout Logo](https://raw.githubusercontent.com/akash-aman/dynamix-layout/main/packages/core/assets/view.gif)
+# 🧩 Dynamix Layout
+
+**Create dynamic, dockable, and resizable layouts with ease, similar to editors like VS Code.**
+
+</div>
+
+<p align="center">
+<a href="https://www.npmjs.com/package/@dynamix-layout/react">
+<img src="https://img.shields.io/npm/v/@dynamix-layout/react?style=for-the-badge&label=React" alt="NPM">
+</a>
+<a href="https://www.npmjs.com/package/@dynamix-layout/core">
+<img src="https://img.shields.io/npm/v/@dynamix-layout/core?style=for-the-badge&label=Core" alt="NPM">
+</a>
+<img src="https://img.shields.io/github/license/akash-aman/dynamix-layout?style=for-the-badge" alt="License">
+</p>
+
+<p align="center">
+<a href="https://www.patreon.com/akashaman">
+<img src="https://img.shields.io/badge/Patreon-Support-F96854?style=for-the-badge&logo=patreon" alt="Patreon"/>
+</a>
+<a href="https://www.buymeacoffee.com/akashaman">
+<img src="https://img.shields.io/badge/Buy%20Me%20A%20Coffee-Donate-FFDD00?style=for-the-badge&logo=buy-me-a-coffee" alt="Buy Me A Coffee"/>
+</a>
+</p>
 
 ## Overview
 
-**Dynamix Layout/Core** is a versatile JavaScript package for creating dynamic layouts with ease. This package provides a set of options and methods to manage and manipulate layouts within a container. With Dynamix Layout/Core, you can efficiently handle layouts, dimensions, coordinates, tabs, and more.
+Dynamix Layout is a powerful JavaScript library designed to help you build complex, multi-panel user interfaces. It provides a core engine for managing the layout logic and a dedicated React wrapper for seamless integration into your React applications. If you've ever wanted to create a user experience with draggable tabs and resizable panels, Dynamix Layout is the tool for you.
 
-## Options Object Parameters
+---
 
-When initializing the package, you can provide an options object with the following parameters:
+### Made with ❤️ by [Akash Aman](https://linktr.ee/akash_aman)
 
-1. **layout** *(JSON)*: This parameter allows you to provide a serialized JSON representation of a layout. It can be used to recreate the same layout in the future. If not provided, it defaults to `null`.
+---
 
-2. **range** *(Number)*: Use this parameter to specify the number of tabs you want to create and get their sizes on layout shift. If not provided, it defaults to `1`.
+![Demo](https://raw.githubusercontent.com/akash-aman/dynamix-layout/main/assets/demo.gif)
 
-3. **dimension** *(Array)*: This parameter is used to set the width and height of the main container in which child layouts exist. It should be an array of two numbers, e.g., `[width, height]`. The default value is `[0, 0]`.
+---
 
-4. **coordinate** *(Array)*: Specify the x and y positions within the window of the container element using this parameter. It should be an array of two numbers, e.g., `[x, y]`. The default value is `[0, 0]`.
+## ✨ Key Features
 
-5. **tabs** *(Array)*: This parameter allows you to provide an array of names for the tabs. These names are used as IDs and key names. The default value is an array created based on the `range` parameter, such as `['tab-1', 'tab-2', ...]`.
+- **Draggable Tabs**: Easily drag and drop tabs to rearrange them or create new panel splits.
+- **Resizable Panels**: Users can click and drag the space between panels to resize them.
+- **Dynamic Splits**: Split any panel horizontally or vertically by dropping a tab onto its edge.
+- **Save & Restore**: Serialize the entire layout state to JSON and restore it later.
+- **Framework-Agnostic Core**: The core logic is written in pure TypeScript with zero dependencies.
+- **Official React Wrapper**: A feature-rich React component (`<Layout />`) and hook (`useLayout`) for easy integration.
 
-## Allowed Parameters
+---
 
-- **layout**: Represents a serialized JSON layout for recreating layouts.
-- **dimension**: Specifies the width and height of the main container.
-- **coordinate**: Sets the x and y positions within the container element's window.
-- **tabs**: An array of names for tabs, used as IDs and key names.
-- **range**: Number of tabs to create and get their sizes on layout shift.
+## 📚 Packages in this Monorepo
 
-## Methods
+This repository contains the following packages:
 
-### 1. shiftTree(srcId, destId)
+### │ 📦 @dynamix-layout/core
 
-The `shiftTree` method is used to shift the layout from a source element with the given `srcId` to a destination element with the `destId`. It returns the sizes of the elements involved in the shift.
+The core, framework-agnostic layout engine. It handles all the complex logic of tree management, dimension calculation, and state updates. You can use this package to integrate Dynamix Layout with any framework (Vue, Svelte, Angular, etc.) or with vanilla JavaScript.
 
-Example:
-```javascript
-const sizes = dynamixLayout.shiftTree('tab-1', 'tab-2');
+➡️ **[View the detailed `@dynamix-layout/core` README](https://www.google.com/search?q=./packages/core/README.md)**
+
+### │ 🚀 @dynamix-layout/react
+
+The official React component library for Dynamix Layout. It provides a simple-to-use `<Layout />` component and an advanced `useLayout` hook that handles all the rendering, state management, and event binding for you. This is the recommended package for all React developers.
+
+➡️ **[View the detailed `@dynamix-layout/react` README](https://www.google.com/search?q=./packages/react/README.md)**
+
+---
+
+## 📦 Installation
+
+For React applications, you will need both the `react` and `core` packages.
+
+```bash
+npm install @dynamix-layout/react @dynamix-layout/core
 ```
 
-### 2. updateTree()
+---
 
-The `updateTree` method is used to recalculate the sizes in case of a window resize. It ensures that the layout remains consistent after a container size change.
+## 🏁 Basic Usage
 
-Example:
-```javascript
-dynamixLayout.updateTree();
+Here's how easy it is to get started with the React component:
+
+```jsx
+import React from 'react'
+import { DynamixLayout } from '@dynamix-layout/react'
+import '@dynamix-layout/react/dist/layout.css' // Import default styles
+
+function App() {
+	const myTabs = [
+		[
+			'editor',
+			<div
+				style={{
+					background: '#c0ca33',
+					height: '100%',
+				}}
+			>
+				Editor
+			</div>,
+		],
+		[
+			'preview',
+			<div
+				style={{
+					background: '#66bb6a',
+					height: '100%',
+				}}
+			>
+				Preview
+			</div>,
+		],
+		[
+			'terminal',
+			<div
+				style={{
+					background: '#ffc400',
+					height: '100%',
+				}}
+			>
+				Terminal
+			</div>,
+		],
+	]
+
+	return (
+		<div
+			style={{
+				height: '100vh',
+				width: '100vw',
+			}}
+		>
+			<DynamixLayout tabs={myTabs} />
+		</div>
+	)
+}
+
+export default App
 ```
 
-### 3. getElement()
+---
 
-The `getElement` method returns information about all the tabs and their sizes. It is useful for retrieving the current state of the layout.
+## 🤝 Contributing
 
-Example:
-```javascript
-const tabInfo = dynamixLayout.getElement();
-```
+Contributions, issues, and feature requests are welcome\! Feel free to check the [issues page](https://www.google.com/search?q=https://github.com/akash-aman/dynamix-layout/issues).
 
-### 4. jsonify()
+## 📝 License
 
-The `jsonify` method is used to generate a JSON representation of the current layout. You can store this JSON in local storage and use it to recreate the same layout at a later time.
+This project is [MIT](https://www.google.com/search?q=./LICENSE) licensed.
 
-Example:
-```javascript
-const layoutJSON = dynamixLayout.jsonify();
-```
+---
 
-## Emojis
+<div align="center">
 
-🔀 - Used to shift the layout with the `shiftTree` method.
+[![Patreon](https://img.shields.io/badge/Patreon-Support-F96854?style=for-the-badge&logo=patreon)](https://www.patreon.com/akashaman)
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-Donate-FFDD00?style=for-the-badge&logo=buy-me-a-coffee)](https://www.buymeacoffee.com/akashaman)
+[![Hire Me](https://img.shields.io/badge/Hire%20Me-Email-blue?style=for-the-badge&logo=gmail)](mailto:sir.akashaman@gmail.com)
 
-🔄 - Triggered when updating the layout using the `updateTree` method.
+### Made with ❤️ by [Akash Aman](https://linktr.ee/akash_aman)
 
-📜 - Represents the information retrieval with the `getElement` method.
-
-💾 - Indicates the ability to save and recreate layouts with the `jsonify` method.
-
-## Example Usage
-
-```javascript
-// Initialize Dynamix Layout/Core
-const dynamixLayout = new DynamixLayoutCore({
-    layout: { /* Your serialized layout JSON here */ },
-    dimension: [800, 600],
-    coordinate: [100, 100],
-    tabs: ['tab-1', 'tab-2', 'tab-3'],
-    range: 3,
-});
-
-// Perform layout shifts
-const sizes = dynamixLayout.shiftTree('tab-1', 'tab-2');
-
-// Handle window resize
-dynamixLayout.updateTree();
-
-// Retrieve tab information
-const tabInfo = dynamixLayout.getElement();
-
-// Generate JSON for storage and future use
-const layoutJSON = dynamixLayout.jsonify();
-```
-
-Dynamix Layout/Core is a powerful tool for managing layouts and tabbed content, making it easier to build dynamic and responsive user interfaces.
-
-For more details and advanced usage, please refer to the official documentation.
-
-**Thank you for choosing Dynamix Layout/Core!** 🚀
-
+</div>

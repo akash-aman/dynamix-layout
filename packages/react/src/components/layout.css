@@ -1,0 +1,30 @@
+
+.DefaultHoverElement {
+  position: absolute;
+  display: none;
+  z-index: -1;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.hide-scrollbar {
+  /* Enable scrolling */
+  overflow: auto;
+  
+  /* --- Hide scrollbar for different browsers --- */
+  
+  /* Firefox */
+  scrollbar-width: none;
+  
+  /* Internet Explorer and Edge */
+  -ms-overflow-style: none;
+}
+
+/* Chrome, Safari, and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.is-dragging .DefaultWrapTabBody > * {
+  /* ...make the direct children (like Monaco Editor) ignore mouse events. */
+  pointer-events: none;
+}
