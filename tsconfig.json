@@ -7,15 +7,19 @@
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,
 		"declaration": true,
-		"outDir": "./dist/types",
 		"moduleResolution": "Node",
-		"rootDir": "./src"
+		"jsx": "preserve",
+		"composite": true,
+		"noEmit": true
 	},
-	"include": [
-	  "src/**/*",
-	  "src/types/**/*"
-	],
-	"exclude": [
-		"node_modules"
+	"include": ["packages/*/src/**/*", "examples/*/src/**/*"],
+	"exclude": ["**/node_modules", "**/dist"],
+	"references": [
+		{
+			"path": "./packages/core"
+		},
+		{
+			"path": "./packages/react"
+		}
 	]
 }
