@@ -1,5 +1,4 @@
 import { Node, Bond } from '../app/dynamix'
-import { Queue } from '../app/queue'
 
 export type Dimension = {
 	w: number
