@@ -18,6 +18,10 @@
 
 ---
 
+![alt text](https://raw.githubusercontent.com/akash-aman/dynamix-layout/main/assets/demo.gif)
+
+---
+
 ## Core Classes
 
 The package is built around three primary classes: `DynamixLayoutCore`, `Node`, and `Bond`.
@@ -170,7 +174,7 @@ const layout = new DynamixLayoutCore({
 layout.updateDimension({ w: 1200, h: 800, x: 0, y: 0 }, true)
 
 // 3. Subscribe to reactive state to render your UI.
-const unsubscribe = Node.cache.nodOpts.subscribe((nodeOptionsMap) => {
+const unsubscribe = Node.cache.nodOpts.onChange((nodeOptionsMap) => {
 	console.log('Layout updated!', nodeOptionsMap)
 	// Your UI rendering logic here...
 })

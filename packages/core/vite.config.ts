@@ -3,7 +3,6 @@ import { resolve } from 'path'
 import dts from 'vite-plugin-dts'
 import fs from 'fs'
 import { visualizer } from 'rollup-plugin-visualizer'
-import { compression, defineAlgorithm } from 'vite-plugin-compression2'
 import stripComments from 'vite-plugin-strip-comments'
 
 const license = fs.readFileSync(resolve(__dirname, '../../LICENSE'), 'utf-8')
@@ -24,20 +23,13 @@ export default defineConfig({
 	plugins: [
 		dts({
 			outDir: 'dist/types',
-			exclude: ['node_modules/**'],
+			exclude: ['node_modules/**', 'src/test/**'],
 		}),
 		visualizer({
 			filename: 'core.html',
 			gzipSize: true,
 			brotliSize: true,
 			template: 'treemap',
-		}),
-		compression({
-			algorithms: [
-				'gzip',
-				'brotliCompress',
-				defineAlgorithm('deflate', { level: 9 }),
-			],
 		}),
 		stripComments({ type: 'none' }),
 	],
