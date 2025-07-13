@@ -64,8 +64,6 @@ export class Node {
 			open: '',
 		};
 
-		const config = { ...defaults, ...options };
-
 		this.type = options.type ?? defaults.type;
 		this.host = options.host ?? defaults.host;
 		this.name = options.name ?? defaults.name;
@@ -462,8 +460,6 @@ export class Node {
 			const leftName = queue.dequeue()
 			const left = new Node({ type: 'tabset', host })
 			const rght = new Node({ type: 'row', host })
-			const leftID = this.tabsIds.get(leftName ?? '') ?? ''
-
 			const leftKid = new Node({ type: 'tab', host: left, name: leftName, unId: this.tabsIds.get(leftName ?? '') ?? crypto.randomUUID() })
 			left.open = leftKid.name
 
