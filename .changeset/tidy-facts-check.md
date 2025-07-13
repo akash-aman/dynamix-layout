@@ -9,4 +9,4 @@ Refactored layout core and added unit tests for reactive state and layout logic
 - Added comprehensive unit tests for layout validation, tree integrity, and reactive state handling.
 - Simplified exports and cleaned up `index.ts`, `.gitignore`, and `package.json` structure.
 - Refactored `vite.config.ts`, `tsconfig.json`, and `vitest.config.ts` for clarity and consistency.
-- Added license metadata to Vite config and updated author name in LICENSE.
+- Added license metadata to Vite configuration and updated author name in LICENSE.
