@@ -311,7 +311,7 @@ describe('Comprehensive Move Test Suite', () => {
 
 	beforeEach(() => {
 		const layoutTreeCopy = JSON.parse(JSON.stringify(initialLayoutTree))
-		layout = new DynamixLayoutCore({tree:layoutTreeCopy})
+		layout = new DynamixLayoutCore({ tree: layoutTreeCopy })
 	})
 
 	describe('Splitting Panels', () => {

@@ -59,7 +59,9 @@ describe('Dynamic Layout Management Test Suite', () => {
 			const tabs = ['dashboard', 'profile', 'settings']
 			const layoutInstance = new DynamixLayoutCore({ tabs })
 			expect(layoutInstance).toBeInstanceOf(DynamixLayoutCore)
-			expect(() => assertNodeTreeIsValid(DynamixLayoutCore._root)).not.toThrow()
+			expect(() =>
+				assertNodeTreeIsValid(DynamixLayoutCore._root)
+			).not.toThrow()
 		})
 	})
 
@@ -131,11 +133,9 @@ describe('Dynamic Layout Management Test Suite', () => {
 							if (srcNode.id === desNode.id) continue
 
 							it(`should handle ${srcNode.type} '${srcNode.id}' moving to '${position}' of ${desNode.type} '${desNode.id}'`, () => {
-								const testInstance = new DynamixLayoutCore(
-									{
-										tree: initialLayoutTree,
-									}
-								)
+								const testInstance = new DynamixLayoutCore({
+									tree: initialLayoutTree,
+								})
 								const moveSucceeded = testInstance.updateTree(
 									srcNode.id,
 									desNode.id,
@@ -144,7 +144,9 @@ describe('Dynamic Layout Management Test Suite', () => {
 
 								if (moveSucceeded) {
 									expect(() =>
-										assertNodeTreeIsValid(DynamixLayoutCore._root)
+										assertNodeTreeIsValid(
+											DynamixLayoutCore._root
+										)
 									).not.toThrow()
 								} else {
 									expect(moveSucceeded).toBe(false)
