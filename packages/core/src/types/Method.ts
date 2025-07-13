@@ -1,4 +1,0 @@
-/**
- * Methods
- */
-export interface IMethods {}

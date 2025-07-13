@@ -1,27 +1,44 @@
-import { defineConfig } from 'vite';
-import path from 'path'
-import typescript from '@rollup/plugin-typescript';
-//const resolvePath = (str: string) => path.resolve(__dirname, str)
+import { defineConfig } from 'vite'
+import { resolve } from 'path'
+import dts from 'vite-plugin-dts'
+import fs from 'fs'
+import { visualizer } from 'rollup-plugin-visualizer'
+import { compression, defineAlgorithm } from 'vite-plugin-compression2'
+import stripComments from 'vite-plugin-strip-comments'
+
+const license = fs.readFileSync(resolve(__dirname, '../../LICENSE'), 'utf-8')
 
 export default defineConfig({
-  build: {
-    lib: {
-      entry: 'src/index.ts',
-      name: 'layout',
-	  formats: ['cjs', 'es', 'iife','umd'],
-    },
-    rollupOptions: {
-      // Customize rollup options as needed.
-	  plugins: [
-		typescript({
-			target: 'es2020',
-			rootDir: path.resolve('./src'), // Use 'path.resolve' to define the rootDir.
-			declaration: true,
-			declarationDir: path.resolve('./dist/types'), // Use 'path.resolve' for declarationDir.
-			exclude: /node_modules/,
-			allowSyntheticDefaultImports: true,
-		  }),
-	  ]
-    },
-  },
-});
+	define: {
+		__LICENSE__: JSON.stringify(license),
+	},
+	build: {
+		sourcemap: 'hidden',
+		lib: {
+			entry: resolve(__dirname, 'src/index.ts'),
+			name: 'dynamix.layout.core',
+			fileName: (format) => `core.${format}.js`,
+			formats: ['cjs', 'es', 'iife', 'umd'],
+		},
+	},
+	plugins: [
+		dts({
+			outDir: 'dist/types',
+			exclude: ['node_modules/**'],
+		}),
+		visualizer({
+			filename: 'core.html',
+			gzipSize: true,
+			brotliSize: true,
+			template: 'treemap',
+		}),
+		compression({
+			algorithms: [
+				'gzip',
+				'brotliCompress',
+				defineAlgorithm('deflate', { level: 9 }),
+			],
+		}),
+		stripComments({ type: 'none' }),
+	],
+})

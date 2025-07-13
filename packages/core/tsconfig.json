@@ -9,13 +9,9 @@
 		"declaration": true,
 		"outDir": "./dist/types",
 		"moduleResolution": "Node",
-		"rootDir": "./src"
+		"rootDir": "./src",
+		"composite": true
 	},
-	"include": [
-	  "src/**/*",
-	  "src/types/**/*"
-	],
-	"exclude": [
-		"node_modules"
-	]
+	"include": ["src/**/*", "src/types/**/*"],
+	"exclude": ["node_modules"]
 }
