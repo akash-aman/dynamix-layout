@@ -42,7 +42,6 @@ declare const __LICENSE__: string
 		console.groupEnd()
 
 		if (typeof window !== 'undefined') {
-
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			(window as any).__DYNAMIX_LAYOUT__ = {
 				__LICENSE__: __LICENSE__,
