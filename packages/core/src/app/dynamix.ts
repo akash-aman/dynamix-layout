@@ -29,7 +29,6 @@ export class Node {
 			new Map<string, NodeOptions>(),
 			areNodeOptionsMapEqual
 		),
-
 	}
 
 	kids: Queue<Node> = new Queue<Node>()
@@ -45,13 +44,13 @@ export class Node {
 
 	constructor(
 		options: {
-			type?: 'row' | 'tabset' | 'tab' | 'bond';
-			host?: Node | null;
-			name?: string;
-			part?: number;
-			dims?: Dimension;
-			unId?: string;
-			open?: string;
+			type?: 'row' | 'tabset' | 'tab' | 'bond'
+			host?: Node | null
+			name?: string
+			part?: number
+			dims?: Dimension
+			unId?: string
+			open?: string
 		} = {}
 	) {
 		const defaults = {
@@ -62,16 +61,16 @@ export class Node {
 			dims: { w: 0, h: 0, x: 0, y: 0 },
 			unId: crypto.randomUUID(),
 			open: '',
-		};
+		}
 
-		this.type = options.type ?? defaults.type;
-		this.host = options.host ?? defaults.host;
-		this.name = options.name ?? defaults.name;
-		this.part = options.part ?? defaults.part;
-		this.dims = options.dims ?? defaults.dims;
-		this.open = options.open ?? defaults.open;
+		this.type = options.type ?? defaults.type
+		this.host = options.host ?? defaults.host
+		this.name = options.name ?? defaults.name
+		this.part = options.part ?? defaults.part
+		this.dims = options.dims ?? defaults.dims
+		this.open = options.open ?? defaults.open
 
-		this.unId = options.unId || defaults.unId;
+		this.unId = options.unId || defaults.unId
 	}
 
 	addBond(parent: Node | null, prev: Node | null = null) {
@@ -88,13 +87,13 @@ export class Node {
 		const reqW = Math.max(
 			minDims!.minWidth,
 			tabCnts!.horizontal * Layout._minW +
-			Math.max(0, tabCnts!.horizontal - 1) * Layout._bond
+				Math.max(0, tabCnts!.horizontal - 1) * Layout._bond
 		)
 
 		const reqH = Math.max(
 			minDims!.minHeight,
 			tabCnts!.vertical * Layout._minH +
-			Math.max(0, tabCnts!.vertical - 1) * Layout._bond
+				Math.max(0, tabCnts!.vertical - 1) * Layout._bond
 		)
 
 		return {
@@ -235,7 +234,7 @@ export class Node {
 	}
 }
 
- class Layout {
+class Layout {
 	static _root: Node
 	static _tree: LayoutTree
 	static _minW: number = 40
@@ -246,15 +245,17 @@ export class Node {
 	nodeOps: ReactiveValue<Map<string, NodeOptions>>
 	cntdown: ReturnType<typeof setTimeout> | null = null
 	tabsIds: TabsIds = new Map<string, string>()
-	constructor(options: {
-		tabs?: string[];
-		tree?: LayoutTree | null;
-		minW?: number;
-		minH?: number;
-		bond?: number;
-		uqid?: string;
-		tabsIds?: TabsIds;
-	} = {}) {
+	constructor(
+		options: {
+			tabs?: string[]
+			tree?: LayoutTree | null
+			minW?: number
+			minH?: number
+			bond?: number
+			uqid?: string
+			tabsIds?: TabsIds
+		} = {}
+	) {
 		const config = {
 			tabs: [],
 			tree: null,
@@ -263,31 +264,31 @@ export class Node {
 			bond: 10,
 			uqid: 'dynamix-layout-root',
 			tabsIds: new Map<string, string>(),
-			...options
-		};
+			...options,
+		}
 
-		this.tabsIds = config.tabsIds;
+		this.tabsIds = config.tabsIds
 
-		if (config.tree) Layout._tree = config.tree;
+		if (config.tree) Layout._tree = config.tree
 
 		Layout._root = new Node({
 			unId: config.uqid,
 			name: config.uqid,
-			type: 'row'
-		});
+			type: 'row',
+		})
 
 		this.nodeOps = createReactiveState(
 			new Map<string, NodeOptions>(),
 			areNodeOptionsMapEqual
-		);
+		)
 
-		Layout._minW = config.minW;
-		Layout._minH = config.minH;
-		Layout._bond = config.bond;
+		Layout._minW = config.minW
+		Layout._minH = config.minH
+		Layout._bond = config.bond
 
-		const tabsQueue = new Queue<string>(config.tabs.length, config.tabs);
-		if (Layout._tree) this.createNodeLayout();
-		else this.createBinaryNodeTreeFromQueue(tabsQueue);
+		const tabsQueue = new Queue<string>(config.tabs.length, config.tabs)
+		if (Layout._tree) this.createNodeLayout()
+		else this.createBinaryNodeTreeFromQueue(tabsQueue)
 
 		Layout._inst = this
 	}
@@ -401,7 +402,6 @@ export class Node {
 
 		if (host.type === 'tabset') Node.cache.mapElem.set(host.unId, host)
 		if (host.type === 'tab') Node.cache.mapElem.set(host.unId, host)
-
 	}
 
 	/**
@@ -431,9 +431,20 @@ export class Node {
 				const left = new Node({ type: 'tabset', host })
 				const rght = new Node({ type: 'tabset', host })
 
-
-				const leftKid = new Node({ type: 'tab', host: left, name: leftName, unId: this.tabsIds.get(leftName ?? '') ?? crypto.randomUUID() })
-				const rghtKid = new Node({ type: 'tab', host: rght, name: rghtName, unId: this.tabsIds.get(rghtName ?? '') ?? crypto.randomUUID() })
+				const leftKid = new Node({
+					type: 'tab',
+					host: left,
+					name: leftName,
+					unId:
+						this.tabsIds.get(leftName ?? '') ?? crypto.randomUUID(),
+				})
+				const rghtKid = new Node({
+					type: 'tab',
+					host: rght,
+					name: rghtName,
+					unId:
+						this.tabsIds.get(rghtName ?? '') ?? crypto.randomUUID(),
+				})
 				left.open = leftKid.name
 				rght.open = rghtKid.name
 				left.kids.enqueue(leftKid)
@@ -452,15 +463,19 @@ export class Node {
 				Node.cache.mapElem.set(leftKid.unId, leftKid)
 				Node.cache.mapElem.set(rghtKid.unId, rghtKid)
 
-
-				console.log(this.tabsIds);
+				console.log(this.tabsIds)
 
 				break
 			}
 			const leftName = queue.dequeue()
 			const left = new Node({ type: 'tabset', host })
 			const rght = new Node({ type: 'row', host })
-			const leftKid = new Node({ type: 'tab', host: left, name: leftName, unId: this.tabsIds.get(leftName ?? '') ?? crypto.randomUUID() })
+			const leftKid = new Node({
+				type: 'tab',
+				host: left,
+				name: leftName,
+				unId: this.tabsIds.get(leftName ?? '') ?? crypto.randomUUID(),
+			})
 			left.open = leftKid.name
 
 			left.kids.enqueue(leftKid)
@@ -474,7 +489,6 @@ export class Node {
 			Node.cache.mapElem.set(left.unId, left)
 			Node.cache.mapDirs.set(leftKid.unId, dir!)
 			Node.cache.mapElem.set(leftKid.unId, leftKid)
-
 
 			nodeQueue.enqueue(rght)
 		}
@@ -514,7 +528,6 @@ export class Node {
 		for (const node of this.NodeLayoutRecursiveIterator(root)) {
 			const tabCnts = Node.cache.tabCnts
 			const dimMins = Node.cache.dimMins
-
 
 			Node.cache.mapElem.set(node.unId, node)
 
@@ -626,9 +639,9 @@ export class Node {
 	}
 
 	calcDimensions(root: Node = Layout._root, supress: boolean = false) {
-		const nodeOpts = new Map<string, NodeOptions>();
-		const bondOpts = new Map<string, NodeOptions>();
-		const tabsIds = new Map<string, NodeOptions>();
+		const nodeOpts = new Map<string, NodeOptions>()
+		const bondOpts = new Map<string, NodeOptions>()
+		const tabsIds = new Map<string, NodeOptions>()
 
 		if (root === Layout._root) this.calculateRootAdjustment()
 
@@ -657,7 +670,6 @@ export class Node {
 							nodDims: {
 								...node.dims,
 							},
-
 						}
 						tabsIds.set(kid.unId, KidNode)
 						return KidNode as NodeOptions
@@ -738,7 +750,9 @@ export class Node {
 		const bnd = Node.cache.mapElem.get(id)
 
 		if (!bnd || !(bnd instanceof Bond)) {
-			console.warn(`Bond with id ${id} not found or is not a Bond instance`)
+			console.warn(
+				`Bond with id ${id} not found or is not a Bond instance`
+			)
 			return
 		}
 
@@ -842,10 +856,15 @@ export class Node {
 		const srcNode = Node.cache.mapElem.get(src)
 		let desNode = Node.cache.mapElem.get(des)
 
-		if (!srcNode || !(srcNode instanceof Node) ||
-			!desNode || !(desNode instanceof Node)
+		if (
+			!srcNode ||
+			!(srcNode instanceof Node) ||
+			!desNode ||
+			!(desNode instanceof Node)
 		) {
-			console.warn(`Source node ${src} not found or is not a Node instance`)
+			console.warn(
+				`Source node ${src} not found or is not a Node instance`
+			)
 			return false
 		}
 
@@ -1313,7 +1332,6 @@ export class Node {
 			)
 
 			for (const kid of src.kids) {
-
 				Node.cache.mapDirs.set(
 					kid.unId,
 					Node.cache.mapDirs.get(gndHost.unId)!
@@ -1321,8 +1339,6 @@ export class Node {
 				Node.cache.dimMins.delete(kid.unId)
 			}
 		}
-
-
 	}
 
 	removeRelation(src: Node, fix: boolean = true) {

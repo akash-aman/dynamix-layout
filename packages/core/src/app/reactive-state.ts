@@ -10,8 +10,7 @@ function createReactiveState<T>(
 
 	const get = (): T => value
 
-	const set = (newValue: T,flag:boolean = false): void => {
-
+	const set = (newValue: T, flag: boolean = false): void => {
 		if (flag) {
 			value = newValue
 			return
