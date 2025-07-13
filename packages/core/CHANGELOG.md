@@ -1,5 +1,11 @@
 # @dynamix-layout/core
 
+## 0.0.4
+
+### Patch Changes
+
+- [#11](https://github.com/akash-aman/dynamix-layout/pull/11) [`d2a3ffb`](https://github.com/akash-aman/dynamix-layout/commit/d2a3ffba03a364bd1043a80504f860c555b82bf8) Thanks [@akash-aman](https://github.com/akash-aman)! - chore: bump version to 0.0.3
+
 ## 0.0.2
 
 ### Patch Changes
