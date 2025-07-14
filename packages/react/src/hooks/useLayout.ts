@@ -491,11 +491,6 @@ export const useDynamixLayout = ({
 			if (e.dataTransfer) {
 				e.dataTransfer.effectAllowed = 'move'
 
-				e.dataTransfer.setData(
-					'text/plain',
-					e.currentTarget.dataset.uid || ''
-				)
-
 				const dragImage = document.createElement('div')
 				dragImage.style.width = '1px'
 				dragImage.style.height = '1px'
@@ -657,8 +652,7 @@ export const useDynamixLayout = ({
 		e.stopPropagation()
 
 		if (e.dataTransfer) {
-			const dragData = e.dataTransfer.getData('text/plain')
-			console.log('Drop data:', dragData)
+			e.dataTransfer.getData('text/plain')
 		}
 	}
 
