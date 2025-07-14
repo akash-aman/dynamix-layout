@@ -81,8 +81,8 @@ importers:
   examples/shadcn:
     dependencies:
       '@dynamix-layout/core':
-        specifier: ^0.0.5
-        version: 0.0.5
+        specifier: workspace:*
+        version: link:../../packages/core
       '@dynamix-layout/react':
         specifier: workspace:*
         version: link:../../packages/react
@@ -223,8 +223,8 @@ importers:
   packages/react:
     dependencies:
       '@dynamix-layout/core':
-        specifier: ^0.0.5
-        version: 0.0.5
+        specifier: workspace:*
+        version: link:../core
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
@@ -598,10 +598,6 @@ packages:
   '@csstools/css-tokenizer@3.0.4':
     resolution: {integrity: sha512-Vd/9EVDiu6PPJt9yAh6roZP6El1xHrdvIVGjyBsHR0RYwNHgL7FJPyIIW4fANJNG6FtyZfvlRPpFI4ZM/lubvw==}
     engines: {node: '>=18'}
-
-  '@dynamix-layout/core@0.0.5':
-    resolution: {integrity: sha512-AcXMBvCAOAx32BYwatOw2Mlb+GxSGspWjMJeLkuyUYHpUag+utOrUybdhLkZmJrJuLIaJcT4ZQPmQr9798tvlA==}
-    engines: {node: '>=22.16.0', pnpm: '>=10.13.1'}
 
   '@emnapi/core@1.4.4':
     resolution: {integrity: sha512-A9CnAbC6ARNMKcIcrQwq6HeHCjpcBZ5wSx4U01WXCqEKlrzB9F9315WDNHkrs2xbx7YjjSxbUYxuN6EQzpcY2g==}
@@ -4679,8 +4675,6 @@ snapshots:
       '@csstools/css-tokenizer': 3.0.4
 
   '@csstools/css-tokenizer@3.0.4': {}
-
-  '@dynamix-layout/core@0.0.5': {}
 
   '@emnapi/core@1.4.4':
     dependencies:
