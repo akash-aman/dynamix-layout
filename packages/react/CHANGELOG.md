@@ -1,5 +1,11 @@
 # @dynamix-layout/react
 
+## 0.0.3
+
+### Patch Changes
+
+- [#38](https://github.com/akash-aman/dynamix-layout/pull/38) [`3f3e2dd`](https://github.com/akash-aman/dynamix-layout/commit/3f3e2dd117b3043256ccb9bb21a10f83215b3d62) Thanks [@akash-aman](https://github.com/akash-aman)! - Fixed drag & drop not working bug for safari browser
+
 ## 0.0.2
 
 ### Patch Changes
