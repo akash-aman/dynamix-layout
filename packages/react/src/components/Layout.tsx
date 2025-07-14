@@ -115,6 +115,9 @@ export const DynamixLayout: ForwardRefExoticComponent<
 			onDragEnd,
 			onDragOver,
 			onDragStart,
+			onDragEnter,
+			onDragLeave,
+			onDrop,
 			dragging,
 			panelsRef,
 			onPointerDown,
@@ -160,6 +163,7 @@ export const DynamixLayout: ForwardRefExoticComponent<
 					tabsets &&
 					Array.from(tabsets.values()).map((tabset) => (
 						<React.Fragment key={tabset.uidNode}>
+
 							<WrapTabPanel
 								ref={(el) => {
 									const id = tabset.uidNode
@@ -168,6 +172,9 @@ export const DynamixLayout: ForwardRefExoticComponent<
 								}}
 								onDragEnd={onDragEnd}
 								onDragOver={onDragOver}
+								onDragEnter={onDragEnter}
+								onDragLeave={onDragLeave}
+								onDrop={onDrop}
 								data-uid={tabset.uidNode}
 								data-type={tabset.typNode}
 								className={
@@ -184,6 +191,7 @@ export const DynamixLayout: ForwardRefExoticComponent<
 									backgroundColor: 'transparent',
 								}}
 							/>
+
 							<WrapTabHead
 								draggable={!isUpdating}
 								data-uid={tabset.uidNode}
@@ -191,6 +199,9 @@ export const DynamixLayout: ForwardRefExoticComponent<
 								onDragOver={handleNavbarDragOver}
 								onDragStart={onDragStart}
 								onDragEnd={onDragEnd}
+								onDragEnter={onDragEnter}
+								onDragLeave={onDragLeave}
+								onDrop={onDrop}
 								ref={(el) => {
 									const id = tabset.uidNode
 									if (el) tabsetsRef.current.set(id, el)
@@ -316,6 +327,9 @@ export const DynamixLayout: ForwardRefExoticComponent<
 						<RootSplitterHoverEl
 							onDragOver={handleRootSplit}
 							onDragEnd={onDragEnd}
+							onDragEnter={onDragEnter}
+							onDragLeave={onDragLeave}
+							onDrop={onDrop}
 							data-uid={rootId}
 							data-area={area}
 							className={
