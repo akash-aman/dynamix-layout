@@ -18,7 +18,7 @@
 
 ---
 
-![alt text](https://raw.githubusercontent.com/akash-aman/dynamix-layout/main/assets/demo.gif)
+![alt text](https://raw.githubusercontent.com/akash-aman/dynamix-layout/main/assets/demo1.gif)
 
 ---
 

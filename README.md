@@ -35,7 +35,7 @@ Dynamix Layout is a powerful JavaScript library designed to help you build compl
 
 ---
 
-![Demo](https://raw.githubusercontent.com/akash-aman/dynamix-layout/main/assets/demo.gif)
+![Demo](https://raw.githubusercontent.com/akash-aman/dynamix-layout/main/assets/demo1.gif)
 
 ---
 
