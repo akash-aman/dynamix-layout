@@ -59,6 +59,10 @@ export default defineConfig({
 	],
 	resolve: {
 		preserveSymlinks: true,
+		alias: [
+			{ find: '@', replacement: resolve(__dirname, './src') },
+			{ find: '@dynamix-layout/core', replacement: resolve(__dirname, '../core/src') }
+		]
 	},
 	css: {
 		modules: {
