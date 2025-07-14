@@ -23,6 +23,9 @@
 <a href="https://www.buymeacoffee.com/akashaman">
 <img src="https://img.shields.io/badge/Buy%20Me%20A%20Coffee-Donate-FFDD00?style=for-the-badge&logo=buy-me-a-coffee" alt="Buy Me A Coffee"/>
 </a>
+<a href="mailto:sir.akashaman@gmail.com">
+<img src="https://img.shields.io/badge/Hire%20Me-Email-blue?style=for-the-badge&logo=gmail" alt="Hire Me"/>
+</a>
 </p>
 
 ## Overview
