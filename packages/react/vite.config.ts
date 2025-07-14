@@ -5,8 +5,14 @@ import dts from 'vite-plugin-dts'
 import { libInjectCss } from 'vite-plugin-lib-inject-css'
 import { visualizer } from 'rollup-plugin-visualizer'
 import stripComments from 'vite-plugin-strip-comments'
+import fs from 'fs'
+
+const license = fs.readFileSync(resolve(__dirname, '../../LICENSE'), 'utf-8')
 
 export default defineConfig({
+	define: {
+		__LICENSE__: JSON.stringify(license),
+	},
 	server: {
 		port: 5174,
 		open: false,
