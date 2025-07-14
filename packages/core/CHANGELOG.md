@@ -1,5 +1,11 @@
 # @dynamix-layout/core
 
+## 0.0.7
+
+### Patch Changes
+
+- [#31](https://github.com/akash-aman/dynamix-layout/pull/31) [`3a3371b`](https://github.com/akash-aman/dynamix-layout/commit/3a3371bb35487ef144de62fd7d35f3931a4f80f8) Thanks [@akash-aman](https://github.com/akash-aman)! - Fixed demo gif.
+
 ## 0.0.6
 
 ### Patch Changes
