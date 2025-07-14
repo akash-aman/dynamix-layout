@@ -23,9 +23,9 @@ export default defineConfig({
 		setupFiles: './src/test/setup.ts',
 		server: {
 			deps: {
-				inline: ['@dynamix-layout/core']
-			}
-		}
+				inline: ['@dynamix-layout/core'],
+			},
+		},
 	},
 	build: {
 		sourcemap: 'hidden',
@@ -67,8 +67,11 @@ export default defineConfig({
 		preserveSymlinks: true,
 		alias: [
 			{ find: '@', replacement: resolve(__dirname, './src') },
-			{ find: '@dynamix-layout/core', replacement: resolve(__dirname, '../core/src') }
-		]
+			{
+				find: '@dynamix-layout/core',
+				replacement: resolve(__dirname, '../core/src'),
+			},
+		],
 	},
 	css: {
 		modules: {

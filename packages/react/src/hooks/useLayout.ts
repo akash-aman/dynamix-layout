@@ -138,6 +138,7 @@ export const useDynamixLayout = ({
 	// --- START: SLIDER POINTER EVENT HANDLERS ---
 	const onPointerMove = (e: PointerEvent) => {
 		if (!dragSliderRef.current.isSliding) return
+
 		layoutInstance.updateSlider(
 			dragSliderRef.current.sliderId!,
 			{
@@ -276,6 +277,10 @@ export const useDynamixLayout = ({
 		e.preventDefault()
 		e.stopPropagation()
 
+		if (e.dataTransfer) {
+			e.dataTransfer.dropEffect = 'move'
+		}
+
 		const navbarElement = e.currentTarget
 		const tabElems = Array.from(
 			navbarElement.childNodes
@@ -377,6 +382,10 @@ export const useDynamixLayout = ({
 		e.preventDefault()
 		e.stopPropagation()
 
+		if (e.dataTransfer) {
+			e.dataTransfer.dropEffect = 'move'
+		}
+
 		const dataArea = e.currentTarget.dataset.area
 		const dataUid = e.currentTarget.dataset.uid
 
@@ -477,11 +486,32 @@ export const useDynamixLayout = ({
 	const onDragStart = (e: React.DragEvent<HTMLDivElement>) => {
 		e.stopPropagation()
 		setDragging(true)
-
+		document.body.style.cursor = 'move'
 		if (e.currentTarget) {
-			const dragImage = new Image()
-			dragImage.src = ''
-			e.dataTransfer?.setDragImage(dragImage, 0, 0)
+			if (e.dataTransfer) {
+				e.dataTransfer.effectAllowed = 'move'
+
+				e.dataTransfer.setData(
+					'text/plain',
+					e.currentTarget.dataset.uid || ''
+				)
+
+				const dragImage = document.createElement('div')
+				dragImage.style.width = '1px'
+				dragImage.style.height = '1px'
+				dragImage.style.backgroundColor = 'transparent'
+				dragImage.style.position = 'absolute'
+				dragImage.style.top = '-1000px'
+				document.body.appendChild(dragImage)
+
+				e.dataTransfer.setDragImage(dragImage, 0, 0)
+
+				setTimeout(() => {
+					if (dragImage.parentNode) {
+						dragImage.parentNode.removeChild(dragImage)
+					}
+				}, 0)
+			}
 
 			rootSplitHoverEl.current.forEach((el) => {
 				if (el) {
@@ -505,6 +535,11 @@ export const useDynamixLayout = ({
 	const onDragOver = (e: React.DragEvent<HTMLDivElement>) => {
 		e.preventDefault()
 		e.stopPropagation()
+		document.body.style.cursor = 'move'
+
+		if (e.dataTransfer) {
+			e.dataTransfer.dropEffect = 'move'
+		}
 
 		if (!dragElemRef.current?.src) {
 			return
@@ -599,6 +634,32 @@ export const useDynamixLayout = ({
 		dragElemRef.current!.area = undefined
 		dragElemRef.current!.src = undefined
 		dragElemRef.current!.des = undefined
+
+		setDragging(false)
+	}
+
+	const onDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
+		e.preventDefault()
+		e.stopPropagation()
+
+		if (e.dataTransfer) {
+			e.dataTransfer.dropEffect = 'move'
+		}
+	}
+
+	const onDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+		e.preventDefault()
+		e.stopPropagation()
+	}
+
+	const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
+		e.preventDefault()
+		e.stopPropagation()
+
+		if (e.dataTransfer) {
+			const dragData = e.dataTransfer.getData('text/plain')
+			console.log('Drop data:', dragData)
+		}
 	}
 
 	const updateActiveTab = (e: React.MouseEvent<HTMLElement>) => {
@@ -668,7 +729,7 @@ export const useDynamixLayout = ({
 				flag,
 				windowResizeTimeout
 			)
-		};
+		}
 
 		updateDimension(true)
 
@@ -726,6 +787,9 @@ export const useDynamixLayout = ({
 		onDragStart,
 		onDragOver,
 		onDragEnd,
+		onDragEnter,
+		onDragLeave,
+		onDrop,
 		onPointerDown,
 		updateActiveTab,
 		handleRootSplit,

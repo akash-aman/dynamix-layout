@@ -27,7 +27,7 @@
 		"paths": {
 			"@/*": ["./src/*"],
 			"@dynamix-layout/core": ["../core/src/index.ts"],
-			"@dynamix-layout/react": ["../react/src/index.ts"],
+			"@dynamix-layout/react": ["../react/src/index.ts"]
 		}
 	},
 	"include": ["src"]
