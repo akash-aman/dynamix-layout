@@ -153,11 +153,11 @@ export default App
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome\! Feel free to check the [issues page](https://www.google.com/search?q=https://github.com/akash-aman/dynamix-layout/issues).
+Contributions, issues, and feature requests are welcome\! Feel free to check the [issues page](https://github.com/akash-aman/dynamix-layout/issues).
 
 ## 📝 License
 
-This project is [MIT](https://www.google.com/search?q=./LICENSE) licensed.
+This project is [MIT](./LICENSE) licensed.
 
 ---
 
