@@ -1,5 +1,11 @@
 # @dynamix-layout/react
 
+## 0.0.4
+
+### Patch Changes
+
+- [#42](https://github.com/akash-aman/dynamix-layout/pull/42) [`e5549f8`](https://github.com/akash-aman/dynamix-layout/commit/e5549f8fddfe3f10f07daddea4c247f3d12d19a2) Thanks [@akash-aman](https://github.com/akash-aman)! - Remove unnecessary data transfer handling in drag and drop events
+
 ## 0.0.3
 
 ### Patch Changes
