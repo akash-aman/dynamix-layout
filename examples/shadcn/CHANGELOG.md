@@ -1,5 +1,12 @@
 # shadcn
 
+## 0.0.2
+
+### Patch Changes
+
+- Updated dependencies [[`1861a2c`](https://github.com/akash-aman/dynamix-layout/commit/1861a2cbc8e0fa90971a1899ed3078e226ecf0b3)]:
+    - @dynamix-layout/react@0.0.2
+
 ## 0.0.1
 
 ### Patch Changes

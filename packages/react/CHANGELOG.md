@@ -1,5 +1,11 @@
 # @dynamix-layout/react
 
+## 0.0.2
+
+### Patch Changes
+
+- [#33](https://github.com/akash-aman/dynamix-layout/pull/33) [`1861a2c`](https://github.com/akash-aman/dynamix-layout/commit/1861a2cbc8e0fa90971a1899ed3078e226ecf0b3) Thanks [@akash-aman](https://github.com/akash-aman)! - - Fixed demo gif.
+
 ## 0.0.1
 
 ### Patch Changes
