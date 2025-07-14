@@ -34,7 +34,15 @@ Dynamix Layout is a powerful JavaScript library designed to help you build compl
 
 ---
 
+
 ### Made with ❤️ by [Akash Aman](https://linktr.ee/akash_aman)
+
+---
+<p align="center">
+	<a href="https://dynamix-layout-shadcn.vercel.app" target="_blank" style="text-decoration: none;">
+		<img src="https://img.shields.io/badge/🌐%20Live%20Demo-Visit%20Now-4CAF50?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo"/>
+	</a>
+</p>
 
 ---
 
@@ -61,13 +69,13 @@ This repository contains the following packages:
 
 The core, framework-agnostic layout engine. It handles all the complex logic of tree management, dimension calculation, and state updates. You can use this package to integrate Dynamix Layout with any framework (Vue, Svelte, Angular, etc.) or with vanilla JavaScript.
 
-➡️ **[View the detailed `@dynamix-layout/core` README](https://www.google.com/search?q=./packages/core/README.md)**
+➡️ **[View the detailed `@dynamix-layout/core` README](./packages/core/README.md)**
 
 ### │ 🚀 @dynamix-layout/react
 
 The official React component library for Dynamix Layout. It provides a simple-to-use `<Layout />` component and an advanced `useLayout` hook that handles all the rendering, state management, and event binding for you. This is the recommended package for all React developers.
 
-➡️ **[View the detailed `@dynamix-layout/react` README](https://www.google.com/search?q=./packages/react/README.md)**
+➡️ **[View the detailed `@dynamix-layout/react` README](./packages/react/README.md)**
 
 ---
 
@@ -88,7 +96,6 @@ Here's how easy it is to get started with the React component:
 ```jsx
 import React from 'react'
 import { DynamixLayout } from '@dynamix-layout/react'
-import '@dynamix-layout/react/dist/layout.css' // Import default styles
 
 function App() {
 	const myTabs = [
