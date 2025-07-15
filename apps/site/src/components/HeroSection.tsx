@@ -24,7 +24,7 @@ const HeroSection = () => {
         
         {/* Subtitle */}
         <h2 className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-4xl mx-auto animate-slide-up" style={{ animationDelay: '0.2s' }}>
-          Create dynamic, dockable, and resizable layouts with ease, similar to editors like VS Code
+           Create dynamic, dockable 🧩, and resizable layouts with ease 🚀, similar to editors like VS Code
         </h2>
         
         {/* Description */}
