@@ -91,7 +91,7 @@ export default App`;
               {Object.entries(installCommands).map(([manager, command]) => (
                 <TabsContent key={manager} value={manager}>
                   <div className="relative">
-                    <pre className="code-block pr-12 text-sm">
+                    <pre className="code-block pr-12 text-sm scrollbar">
                       <code>{command}</code>
                     </pre>
                     <Button
@@ -132,7 +132,7 @@ export default App`;
             </div>
 
             <div className="relative">
-              <pre className="code-block pr-12 text-xs overflow-x-auto max-h-80">
+              <pre className="code-block pr-12 text-xs overflow-x-auto scrollbar max-h-80">
                 <code>{basicExample}</code>
               </pre>
               <Button
