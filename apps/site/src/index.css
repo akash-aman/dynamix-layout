@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Tech-focused dark theme */
+    --background: 220 26% 6%;
+    --foreground: 210 30% 95%;
+    
+    /* Primary brand colors - vibrant tech blue */
+    --primary: 217 91% 60%;
+    --primary-foreground: 220 26% 6%;
+    --primary-glow: 217 100% 70%;
+    --primary-deep: 217 91% 45%;
+    
+    /* Cards and surfaces */
+    --card: 220 26% 8%;
+    --card-foreground: 210 30% 95%;
+    
+    /* Secondary surfaces */
+    --secondary: 220 26% 10%;
+    --secondary-foreground: 210 30% 95%;
+    
+    /* Muted elements */
+    --muted: 220 26% 12%;
+    --muted-foreground: 210 20% 70%;
+    
+    /* Accent colors */
+    --accent: 220 26% 14%;
+    --accent-foreground: 210 30% 95%;
+    
+    /* Interactive elements */
+    --popover: 220 26% 8%;
+    --popover-foreground: 210 30% 95%;
+    
+    /* Borders and inputs */
+    --border: 220 26% 18%;
+    --input: 220 26% 12%;
+    --ring: 217 91% 60%;
+    
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 30% 95%;
+    
+    /* Design system extensions */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary-deep)), hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-bg: linear-gradient(180deg, hsl(var(--background)), hsl(220 26% 4%));
+    
+    /* Shadows and glows */
+    --shadow-primary: 0 10px 40px -10px hsl(var(--primary) / 0.3);
+    --shadow-glow: 0 0 60px hsl(var(--primary-glow) / 0.2);
+    --shadow-card: 0 8px 30px -6px hsl(220 26% 2% / 0.6);
+    
+    /* Animation easing */
+    --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background: var(--gradient-bg);
+    min-height: 100vh;
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Custom utilities */
+@layer utilities {
+  .bg-gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .bg-gradient-hero {
+    background: var(--gradient-hero);
+  }
+  
+  .shadow-primary {
+    box-shadow: var(--shadow-primary);
+  }
+  
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.6s var(--ease-smooth) forwards;
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.8s var(--ease-smooth) forwards;
+  }
+}
+
+/* Keyframe animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: var(--shadow-glow); }
+  50% { box-shadow: 0 0 80px hsl(var(--primary-glow) / 0.4); }
+}
+
+@keyframes slide-up {
+  from { 
+    opacity: 0; 
+    transform: translateY(30px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Component-specific styles */
+.hero-badge {
+  @apply inline-flex items-center px-4 py-2 rounded-full text-sm font-medium;
+  @apply bg-gradient-primary text-white shadow-primary;
+  @apply hover:scale-105 transition-transform duration-200;
+}
+
+.feature-card {
+  @apply bg-card rounded-xl p-6 shadow-card;
+  @apply border border-border/50;
+  @apply hover:shadow-primary/10 hover:border-primary/30;
+  @apply transition-all duration-300;
+}
+
+.code-block {
+  @apply bg-muted rounded-lg p-4 border border-border;
+  @apply font-mono text-sm overflow-x-auto;
+}
