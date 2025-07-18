@@ -66,6 +66,7 @@ export interface LayoutProps {
 	bondWidth?: number
 	minTabHeight?: number
 	minTabWidth?: number
+	updateJSON?: (layoutTree: LayoutTree) => void
 	sliderUpdateTimeout?: number
 	windowResizeTimeout?: number
 	disableSliderTimeout?: boolean
@@ -93,6 +94,7 @@ export interface useDynamixLayoutOptions {
 	rootId?: string
 	layoutTree?: LayoutTree
 	enableTabbar: boolean
+	updateJSON?: (layoutTree: LayoutTree) => void
 	dimensions: () => Dimension
 	sliderUpdateTimeout: number
 	windowResizeTimeout: number

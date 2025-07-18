@@ -1,4 +1,4 @@
-import { JSX } from 'solid-js'
+import { JSX, createMemo, splitProps } from 'solid-js'
 
 type DivProps = {
 	children?: JSX.Element
@@ -12,8 +12,9 @@ export const DefaultWrapTabLabel = (props: DivProps) => (
 		data-state={props.active ? 'active' : 'inactive'}
 		style={{
 			'align-self': 'center',
-			padding: '6px',
+			padding: '4px 6px',
 			'box-sizing': 'border-box',
+			'font-size': '14px',
 			'border-radius': '4px',
 			...(props.style as JSX.CSSProperties),
 		}}
@@ -86,7 +87,6 @@ export const DefaultWrapTabPanel = (props: DivProps) => (
 )
 
 export const DefaultHoverElement = (props: DivProps) => (
-	// eslint-disable-next-line solid/reactivity
 	<div
 		{...props}
 		class={`DefaultHoverElement ${props.class || ''}`}
@@ -113,13 +113,12 @@ export const DefaultHoverElement = (props: DivProps) => (
 export const DefaultSliderElement = (
 	props: {
 		direction?: boolean
+		children?: JSX.Element
 	} & DivProps
 ) => {
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars, solid/reactivity
-	const { direction, ...rest } = props
 	return (
 		<div
-			{...rest}
+			{...props}
 			class={`DefaultSliderElement ${props.class || ''}`}
 			style={{
 				width: '100%',
@@ -132,6 +131,57 @@ export const DefaultSliderElement = (
 				...(props.style as JSX.CSSProperties),
 			}}
 		>
+			<div
+				style={{
+					display: 'flex',
+					'align-items': 'center',
+					gap: '4px',
+					height: '100%',
+					'flex-direction': props.direction ? 'column' : 'row',
+				}}
+			>
+				{!props.direction ? (
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						class="lucide lucide-grip-vertical size-2.5"
+					>
+						<circle cx="9" cy="12" r="1" />
+						<circle cx="9" cy="5" r="1" />
+						<circle cx="9" cy="19" r="1" />
+						<circle cx="15" cy="12" r="1" />
+						<circle cx="15" cy="5" r="1" />
+						<circle cx="15" cy="19" r="1" />
+					</svg>
+				) : (
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						style={{ transform: 'rotate(90deg)' }}
+					>
+						<circle cx="9" cy="12" r="1" />
+						<circle cx="9" cy="5" r="1" />
+						<circle cx="9" cy="19" r="1" />
+						<circle cx="15" cy="12" r="1" />
+						<circle cx="15" cy="5" r="1" />
+						<circle cx="15" cy="19" r="1" />
+					</svg>
+				)}
+			</div>
 			{props.children}
 		</div>
 	)
@@ -144,52 +194,64 @@ export const RootSplitterHoverEl = (
 		gap?: string
 	} & DivProps
 ) => {
-	const { area, size = { h: '20%', w: '6px' }, gap = '0px', ...rest } = props
+	const [local, rest] = splitProps(props, [
+		'area',
+		'size',
+		'gap',
+		'class',
+		'style',
+		'children',
+	])
 
-	const style: JSX.CSSProperties = { ...(rest.style as JSX.CSSProperties) }
+	const dynamicStyle = createMemo(() => {
+		const size = local.size || { h: '20%', w: '6px' }
+		const gap = local.gap || '0px'
+		const style: JSX.CSSProperties = {}
 
-	if (area === 'left') {
-		Object.assign(style, {
-			'border-top-right-radius': '16px',
-			'border-bottom-right-radius': '16px',
-			height: size.h,
-			left: gap,
-			width: size.w,
-		})
-		style.top = `calc(50% - ${style.height} / 2)`
-	} else if (area === 'top') {
-		Object.assign(style, {
-			'border-bottom-left-radius': '16px',
-			'border-bottom-right-radius': '16px',
-			width: size.h,
-			top: gap,
-			height: size.w,
-		})
-		style.left = `calc(50% - ${style.width} / 2)`
-	} else if (area === 'right') {
-		Object.assign(style, {
-			'border-top-left-radius': '16px',
-			'border-bottom-left-radius': '16px',
-			height: size.h,
-			right: gap,
-			width: size.w,
-		})
-		style.top = `calc(50% - ${style.height} / 2)`
-	} else if (area === 'bottom') {
-		Object.assign(style, {
-			'border-top-left-radius': '16px',
-			'border-top-right-radius': '16px',
-			width: size.h,
-			bottom: gap,
-			height: size.w,
-		})
-		style.left = `calc(50% - ${style.width} / 2)`
-	}
+		if (local.area === 'left') {
+			Object.assign(style, {
+				'border-top-right-radius': '16px',
+				'border-bottom-right-radius': '16px',
+				height: size.h,
+				left: gap,
+				width: size.w,
+			})
+			style.top = `calc(50% - ${size.h} / 2)`
+		} else if (local.area === 'top') {
+			Object.assign(style, {
+				'border-bottom-left-radius': '16px',
+				'border-bottom-right-radius': '16px',
+				width: size.h,
+				top: gap,
+				height: size.w,
+			})
+			style.left = `calc(50% - ${size.h} / 2)`
+		} else if (local.area === 'right') {
+			Object.assign(style, {
+				'border-top-left-radius': '16px',
+				'border-bottom-left-radius': '16px',
+				height: size.h,
+				right: gap,
+				width: size.w,
+			})
+			style.top = `calc(50% - ${size.h} / 2)`
+		} else if (local.area === 'bottom') {
+			Object.assign(style, {
+				'border-top-left-radius': '16px',
+				'border-top-right-radius': '16px',
+				width: size.h,
+				bottom: gap,
+				height: size.w,
+			})
+			style.left = `calc(50% - ${size.h} / 2)`
+		}
+		return style
+	})
 
 	return (
 		<div
 			{...rest}
-			class={`RootSplitterHoverEl ${props.class || ''}`}
+			class={`RootSplitterHoverEl ${local.class || ''}`}
 			style={{
 				position: 'absolute',
 				'z-index': -1,
@@ -197,10 +259,11 @@ export const RootSplitterHoverEl = (
 				'box-sizing': 'border-box',
 				'background-color': '#0081f9',
 				cursor: 'grab',
-				...style,
+				...(local.style as JSX.CSSProperties),
+				...dynamicStyle(),
 			}}
 		>
-			{props.children}
+			{local.children}
 		</div>
 	)
 }

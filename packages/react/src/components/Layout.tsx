@@ -1,3 +1,4 @@
+"use client"
 import React, {
 	ForwardRefExoticComponent,
 	RefAttributes,
@@ -51,6 +52,7 @@ export const DynamixLayout: ForwardRefExoticComponent<
 			bondWidth = DynamixLayoutCore._bond,
 			minTabHeight = DynamixLayoutCore._minH,
 			minTabWidth = DynamixLayoutCore._minW,
+			updateJSON,
 			sliderUpdateTimeout = 2,
 			windowResizeTimeout = 2,
 			disableSliderTimeout = true,
@@ -130,6 +132,7 @@ export const DynamixLayout: ForwardRefExoticComponent<
 		} = useDynamixLayout({
 			tabOutput,
 			rootId,
+			updateJSON,
 			enableTabbar,
 			layoutTree,
 			tabHeadHeight,
@@ -163,7 +166,6 @@ export const DynamixLayout: ForwardRefExoticComponent<
 					tabsets &&
 					Array.from(tabsets.values()).map((tabset) => (
 						<React.Fragment key={tabset.uidNode}>
-
 							<WrapTabPanel
 								ref={(el) => {
 									const id = tabset.uidNode

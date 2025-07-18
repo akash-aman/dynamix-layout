@@ -1,17 +1,24 @@
 import React, { forwardRef, HTMLAttributes, ReactNode } from 'react'
 
+type DefaultWrapTabLabelProps = HTMLAttributes<HTMLDivElement> & {
+	active?: boolean
+	children?: ReactNode
+}
+
 export const DefaultWrapTabLabel = forwardRef<
 	HTMLDivElement,
-	{ children?: ReactNode } & HTMLAttributes<HTMLDivElement>
->(({ children, ...props }, ref) => (
+	DefaultWrapTabLabelProps
+>(({ children, active, ...props }, ref) => (
 	<div
 		ref={ref}
 		{...props}
+		data-state={active ? 'active' : 'inactive'}
 		className={`DefaultWrapTabLabel ${props.className || ''}`}
 		style={{
 			alignSelf: 'center',
-			padding: '6px',
+			padding: '4px 6px',
 			boxSizing: 'border-box',
+			fontSize: '14px',
 			borderRadius: '4px',
 			...props.style,
 		}}
@@ -28,13 +35,15 @@ export const DefaultWrapTabBody = forwardRef<
 	<div
 		ref={ref}
 		{...props}
-		className={`DefaultWrapTabBody ${props.className || ''}`}
+		className={`DefaultWrapTabBody hide-scrollbar ${props.className || ''}`}
 		style={{
 			boxSizing: 'border-box',
 			height: '100%',
 			width: '100%',
 			display: 'grid',
 			overflow: 'auto',
+			scrollbarWidth: 'none',
+			msOverflowStyle: 'none',
 			...props.style,
 		}}
 	>
@@ -50,7 +59,7 @@ export const DefaultWrapTabHead = forwardRef<
 	<div
 		ref={ref}
 		{...props}
-		className={`DefaultWrapTabHead ${props.className || ''}`}
+		className={`DefaultWrapTabHead hide-scrollbar ${props.className || ''}`}
 		style={{
 			display: 'grid',
 			gridAutoFlow: 'column',
@@ -58,12 +67,14 @@ export const DefaultWrapTabHead = forwardRef<
 			alignItems: 'center',
 			gap: '6px',
 			paddingLeft: '8px',
+			backgroundColor: '#dfdfdf',
 			width: '100%',
 			boxSizing: 'border-box',
 			height: '100%',
-			overflowX: 'auto',
-			placeItems: 'self-start',
 			overflow: 'auto',
+			placeItems: 'self-start',
+			scrollbarWidth: 'none',
+			msOverflowStyle: 'none',
 			...props.style,
 		}}
 	>
@@ -104,15 +115,16 @@ export const DefaultHoverElement = forwardRef<
 		className={`DefaultHoverElement ${props.className || ''}`}
 		{...props}
 		style={{
-			display: 'flex',
+			position: 'absolute',
+			display: 'none',
+			zIndex: -1,
+			backgroundColor: 'rgba(0, 175, 249, 0.5)',
 			justifyContent: 'center',
 			alignItems: 'center',
 			opacity: 0.7,
-			position: 'absolute',
 			boxSizing: 'border-box',
 			fontWeight: 'bold',
 			pointerEvents: 'none',
-			backgroundColor: 'rgba(0, 175, 249, 0.5)',
 			borderRadius: '10px',
 			transition: 'all 0.2s ease',
 			border: '2px dashed rgb(0, 196, 42)',
@@ -124,13 +136,15 @@ export const DefaultHoverElement = forwardRef<
 ))
 DefaultHoverElement.displayName = 'DefaultHoverElement'
 
+type DefaultSliderElementProps = HTMLAttributes<HTMLDivElement> & {
+	children?: ReactNode
+	direction?: boolean
+}
+
 export const DefaultSliderElement = forwardRef<
 	HTMLDivElement,
-	{
-		children?: ReactNode
-		direction?: boolean
-	} & HTMLAttributes<HTMLDivElement>
->(({ children, direction = false, ...props }, ref) => ( // eslint-disable-line @typescript-eslint/no-unused-vars
+	DefaultSliderElementProps
+>(({ children, direction, ...props }, ref) => (
 	<div
 		ref={ref}
 		{...props}
@@ -146,6 +160,57 @@ export const DefaultSliderElement = forwardRef<
 			...props.style,
 		}}
 	>
+		<div
+			style={{
+				display: 'flex',
+				alignItems: 'center',
+				gap: '4px',
+				height: '100%',
+				flexDirection: direction ? 'column' : 'row',
+			}}
+		>
+			{!direction ? (
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="24"
+					height="24"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					strokeWidth="2"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+					className="lucide lucide-grip-vertical size-2.5"
+				>
+					<circle cx="9" cy="12" r="1" />
+					<circle cx="9" cy="5" r="1" />
+					<circle cx="9" cy="19" r="1" />
+					<circle cx="15" cy="12" r="1" />
+					<circle cx="15" cy="5" r="1" />
+					<circle cx="15" cy="19" r="1" />
+				</svg>
+			) : (
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="24"
+					height="24"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					strokeWidth="2"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+					style={{ transform: 'rotate(90deg)' }}
+				>
+					<circle cx="9" cy="12" r="1" />
+					<circle cx="9" cy="5" r="1" />
+					<circle cx="9" cy="19" r="1" />
+					<circle cx="15" cy="12" r="1" />
+					<circle cx="15" cy="5" r="1" />
+					<circle cx="15" cy="19" r="1" />
+				</svg>
+			)}
+		</div>
 		{children}
 	</div>
 ))
@@ -170,48 +235,44 @@ export const RootSplitterHoverEl = forwardRef<
 		},
 		ref
 	) => {
-		props.style = { ...props.style }
+		let dynamicStyle: React.CSSProperties = {}
 
 		if (area === 'left') {
-			props.style = {
+			dynamicStyle = {
 				borderTopRightRadius: '16px',
 				borderBottomRightRadius: '16px',
 				height: size.h,
 				left: gap,
 				width: size.w,
-				...props.style,
 			}
-			props.style.top = `calc(50% - ${props.style.height} / 2)`
+			dynamicStyle.top = `calc(50% - ${dynamicStyle.height} / 2)`
 		} else if (area === 'top') {
-			props.style = {
+			dynamicStyle = {
 				borderBottomLeftRadius: '16px',
 				borderBottomRightRadius: '16px',
 				width: size.h,
 				top: gap,
 				height: size.w,
-				...props.style,
 			}
-			props.style.left = `calc(50% - ${props.style.width} / 2)`
+			dynamicStyle.left = `calc(50% - ${dynamicStyle.width} / 2)`
 		} else if (area === 'right') {
-			props.style = {
+			dynamicStyle = {
 				borderTopLeftRadius: '16px',
 				borderBottomLeftRadius: '16px',
 				height: size.h,
 				right: gap,
 				width: size.w,
-				...props.style,
 			}
-			props.style.top = `calc(50% - ${props.style.height} / 2)`
+			dynamicStyle.top = `calc(50% - ${dynamicStyle.height} / 2)`
 		} else if (area === 'bottom') {
-			props.style = {
+			dynamicStyle = {
 				borderTopLeftRadius: '16px',
 				borderTopRightRadius: '16px',
 				width: size.h,
 				bottom: gap,
 				height: size.w,
-				...props.style,
 			}
-			props.style.left = `calc(50% - ${props.style.width} / 2)`
+			dynamicStyle.left = `calc(50% - ${dynamicStyle.width} / 2)`
 		}
 
 		return (
@@ -226,6 +287,7 @@ export const RootSplitterHoverEl = forwardRef<
 					boxSizing: 'border-box',
 					backgroundColor: '#0081f9',
 					cursor: 'grab',
+					...dynamicStyle,
 					...props.style,
 				}}
 			>

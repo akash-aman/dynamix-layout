@@ -11,6 +11,7 @@ export const useDynamixLayout = ({
 	tabOutput,
 	rootId,
 	layoutTree,
+	updateJSON,
 	dimensions,
 	tabHeadHeight,
 	enableTabbar,
@@ -62,7 +63,7 @@ export const useDynamixLayout = ({
 
 	const layoutInstance = new DynamixLayoutCore({
 		tabs: tabOutput.keys,
-		tree: layoutJSON(),
+		tree: layoutJSON(), // eslint-disable-line solid/reactivity
 		minW: minTabWidth,
 		minH: minTabHeight,
 		bond: bondWidth,
@@ -82,7 +83,7 @@ export const useDynamixLayout = ({
 
 	const updateAllTabBodyStyles = () => {
 		const tabNodes = Node.cache.tabOpts.get()
-		tabNodes.forEach((node, id) => {
+		tabNodes.forEach((node: NodeOptions, id: string) => {
 			const tabEl = tabsRef.get(id)
 			if (tabEl) {
 				tabEl.style.width = `${node.nodDims.w}px`
@@ -100,7 +101,7 @@ export const useDynamixLayout = ({
 
 	const updateAllSliderStyles = () => {
 		const sliderNodes = Node.cache.bndOpts.get()
-		sliderNodes.forEach((node, id) => {
+		sliderNodes.forEach((node: NodeOptions, id: string) => {
 			const sliderEl = slidersRef.get(id)
 			if (sliderEl) {
 				sliderEl.style.width = `${node.nodDims.w}px`
@@ -112,7 +113,7 @@ export const useDynamixLayout = ({
 	}
 
 	Node.cache.nodOpts.onChange((nodes: Map<string, NodeOptions>) => {
-		nodes.forEach((node, id) => {
+		nodes.forEach((node: NodeOptions, id: string) => {
 			const panelEl = panelsRef.get(id)
 			if (panelEl) {
 				panelEl.style.width = `${node.nodDims.w}px`
@@ -169,6 +170,7 @@ export const useDynamixLayout = ({
 		dragSliderRef.isSliding = false
 		dragSliderRef.sliderId = undefined
 
+		if (updateJSON) updateJSON(DynamixLayoutCore._root.toJSON())
 		sliderElement.releasePointerCapture(e.pointerId)
 		sliderElement.removeEventListener('pointermove', onPointerMove)
 		sliderElement.removeEventListener('pointerup', onPointerUp)
@@ -555,7 +557,7 @@ export const useDynamixLayout = ({
 		})
 	}
 
-	const onDragEnd = (e: DragEvent) => {
+	const onDragEnd = (e: DragEvent) => { // eslint-disable-line @typescript-eslint/no-unused-vars
 		document.body.style.cursor = 'default'
 		rootSplitHoverEl.forEach((el) => {
 			if (el) {
@@ -620,6 +622,7 @@ export const useDynamixLayout = ({
 				updateTabsets(Node.cache.nodOpts.get())
 				updateSliders(Node.cache.bndOpts.get())
 				updateAllTabBodyStyles()
+				if (updateJSON) updateJSON(DynamixLayoutCore._root.toJSON())
 			})
 		}
 
@@ -687,7 +690,7 @@ export const useDynamixLayout = ({
 		// Update the state in the cache
 		node.host.open = node.name
 		nodeOpts.nodOpen = node.name
-		nodeOpts.nodKids?.forEach((kid) => {
+		nodeOpts.nodKids?.forEach((kid: NodeOptions) => {
 			kid.nodOpen = kid.nodName === node.name
 		})
 
@@ -726,6 +729,8 @@ export const useDynamixLayout = ({
 		updateSliders(Node.cache.bndOpts.get())
 
 		updateAllTabBodyStyles()
+
+		if (updateJSON) updateJSON(DynamixLayoutCore._root.toJSON())
 
 		onCleanup(() => {
 			window.removeEventListener('resize', handler)

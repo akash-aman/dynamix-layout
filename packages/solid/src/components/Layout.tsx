@@ -52,6 +52,7 @@ export const DynamixLayout: ParentComponent<LayoutProps> = (props) => {
 		}
 	}
 
+	/* eslint-disable solid/reactivity */
 	const {
 		tabsetsRef,
 		slidersRef,
@@ -63,6 +64,7 @@ export const DynamixLayout: ParentComponent<LayoutProps> = (props) => {
 		onDragStart,
 		onDragEnter,
 		onDragLeave,
+
 		onDrop,
 		dragging,
 		panelsRef,
@@ -76,6 +78,7 @@ export const DynamixLayout: ParentComponent<LayoutProps> = (props) => {
 	} = useDynamixLayout({
 		tabOutput: tabOutput(),
 		rootId: props.rootId || 'dynamix-layout-root',
+		updateJSON: props.updateJSON,
 		enableTabbar:
 			props.enableTabbar === undefined ? true : props.enableTabbar,
 		layoutTree: props.layoutTree,
@@ -96,7 +99,7 @@ export const DynamixLayout: ParentComponent<LayoutProps> = (props) => {
 				: props.disableResizeTimeout,
 		hoverElementStyles: props.hoverElementStyles,
 	})
-
+	/* eslint-disable solid/reactivity */
 	const WrapTabPanel = props.WrapTabPanel || DefaultWrapTabPanel
 	const WrapTabHead = props.WrapTabHead || DefaultWrapTabHead
 	const WrapTabLabel = props.WrapTabLabel || DefaultWrapTabLabel
@@ -123,7 +126,7 @@ export const DynamixLayout: ParentComponent<LayoutProps> = (props) => {
 				{(tabset) => (
 					<>
 						<WrapTabPanel
-							ref={(el: any) => {
+							ref={(el: HTMLDivElement) => {
 								const id = tabset.uidNode
 								if (el) panelsRef.set(id, el)
 								else panelsRef.delete(id)
@@ -160,7 +163,7 @@ export const DynamixLayout: ParentComponent<LayoutProps> = (props) => {
 							onDragEnter={onDragEnter}
 							onDragLeave={onDragLeave}
 							onDrop={onDrop}
-							ref={(el: any) => {
+							ref={(el: HTMLDivElement) => {
 								const id = tabset.uidNode
 								if (el) tabsetsRef.set(id, el)
 								else tabsetsRef.delete(id)
@@ -188,7 +191,7 @@ export const DynamixLayout: ParentComponent<LayoutProps> = (props) => {
 										onDragStart={onDragStart}
 										onDragEnd={onDragEnd}
 										draggable={!isUpdating()}
-										active={tab.nodOpen as boolean}
+										active={tab.nodOpen ? true : false}
 										class={
 											'hide-scrollbar ' +
 											(props.tabLabelElementClass || '')
@@ -230,7 +233,7 @@ export const DynamixLayout: ParentComponent<LayoutProps> = (props) => {
 								'overscroll-behavior': 'contain',
 								...(props.tabBodyElementStyles as object),
 							}}
-							ref={(el: any) => {
+							ref={(el: HTMLDivElement) => {
 								if (tabId) {
 									if (el) tabsRef.set(tabId, el)
 									else tabsRef.delete(tabId)
@@ -259,7 +262,7 @@ export const DynamixLayout: ParentComponent<LayoutProps> = (props) => {
 						class={
 							'hide-scrollbar ' + (props.sliderElementClass || '')
 						}
-						ref={(el: any) => {
+						ref={(el: HTMLDivElement) => {
 							const id = slider.uidNode
 							if (el) slidersRef.set(id, el)
 							else slidersRef.delete(id)

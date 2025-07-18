@@ -14,20 +14,20 @@ Alternatively, you can email us at **[sir.akashaman@gmail.com]**.
 
 To help us understand and resolve the issue quickly, please include the following in your report:
 
-* A clear and concise description of the vulnerability.
-* The commit hash of the version that is affected.
-* Step-by-step instructions to reproduce the issue.
-* Any proof-of-concept code, screenshots, or videos that demonstrate the vulnerability.
-* If you have a proposed fix, please include it.
+- A clear and concise description of the vulnerability.
+- The commit hash of the version that is affected.
+- Step-by-step instructions to reproduce the issue.
+- Any proof-of-concept code, screenshots, or videos that demonstrate the vulnerability.
+- If you have a proposed fix, please include it.
 
 ## Our Commitment
 
 When you report a vulnerability to us, you can expect the following:
 
-* We will acknowledge receipt of your report within **48 hours**.
-* We will provide you with an estimated timeline for addressing the vulnerability.
-* We will notify you when the vulnerability has been fixed.
-* We will publicly credit you for your discovery, unless you prefer to remain anonymous.
+- We will acknowledge receipt of your report within **48 hours**.
+- We will provide you with an estimated timeline for addressing the vulnerability.
+- We will notify you when the vulnerability has been fixed.
+- We will publicly credit you for your discovery, unless you prefer to remain anonymous.
 
 We aim to resolve critical vulnerabilities as quickly as possible.
 

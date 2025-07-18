@@ -11,6 +11,7 @@ export const useDynamixLayout = ({
 	tabOutput,
 	rootId,
 	layoutTree,
+	updateJSON,
 	dimensions,
 	tabHeadHeight,
 	enableTabbar,
@@ -85,7 +86,7 @@ export const useDynamixLayout = ({
 	}
 
 	Node.cache.nodOpts.onChange((nodes: Map<string, NodeOptions>) => {
-		nodes.forEach((node, id) => {
+		nodes.forEach((node: NodeOptions, id: string) => {
 			const panelEl = panelsRef.current.get(id)
 			if (panelEl) {
 				panelEl.style.width = `${node.nodDims.w}px`
@@ -107,7 +108,7 @@ export const useDynamixLayout = ({
 	})
 
 	Node.cache.bndOpts.onChange((nodes: Map<string, NodeOptions>) => {
-		nodes.forEach((node, id) => {
+		nodes.forEach((node: NodeOptions, id: string) => {
 			const sliderEl = slidersRef.current.get(id)
 			if (sliderEl) {
 				sliderEl.style.width = `${node.nodDims.w}px`
@@ -119,7 +120,7 @@ export const useDynamixLayout = ({
 	})
 
 	Node.cache.tabOpts.onChange((nodes: Map<string, NodeOptions>) => {
-		nodes.forEach((node, id) => {
+		nodes.forEach((node: NodeOptions, id: string) => {
 			const tabEl = tabsRef.current.get(id)
 			if (tabEl) {
 				tabEl.style.width = `${node.nodDims.w}px`
@@ -157,7 +158,7 @@ export const useDynamixLayout = ({
 		dragSliderRef.current.isSliding = false
 		dragSliderRef.current.sliderId = undefined
 
-		// Release pointer capture and remove listeners
+		if (updateJSON) updateJSON(DynamixLayoutCore._root.toJSON())
 		sliderElement.releasePointerCapture(e.pointerId)
 		sliderElement.removeEventListener('pointermove', onPointerMove)
 		sliderElement.removeEventListener('pointerup', onPointerUp)
@@ -304,13 +305,14 @@ export const useDynamixLayout = ({
 		const lastTab = tabElems[tabElems.length - 1]
 		const firstRect = firstTab.getBoundingClientRect()
 		const lastRect = lastTab.getBoundingClientRect()
+		let tabsGap = 6
 
 		if (clientY < navbarRect.top || clientY > navbarRect.bottom) return
 
 		if (clientX > lastRect.right) {
 			const newLeft = lastRect.right + 1
 			const newTop = lastRect.top
-			const newWidth = 4
+			const newWidth = tabsGap - 2
 			const newHeight = lastRect.height
 			const newArea = 'right'
 
@@ -326,9 +328,9 @@ export const useDynamixLayout = ({
 		}
 
 		if (clientX < firstRect.left) {
-			const newLeft = firstRect.left - 5
+			const newLeft = firstRect.left - tabsGap + 1
 			const newTop = firstRect.top
-			const newWidth = 4
+			const newWidth = tabsGap - 2
 			const newHeight = firstRect.height
 			const newArea = 'left'
 
@@ -346,6 +348,7 @@ export const useDynamixLayout = ({
 		let closestTab = null
 		let minDistance = Infinity
 		let isLeftSide = false
+		let index = 0
 
 		for (let i = 0; i < tabElems.length; i++) {
 			const tabRect = tabElems[i].getBoundingClientRect()
@@ -356,14 +359,25 @@ export const useDynamixLayout = ({
 				minDistance = distance
 				closestTab = tabElems[i]
 				isLeftSide = clientX < tabCenterX
+				index = i
 			}
+		}
+
+		if (
+			tabElems.length > 1 &&
+			((isLeftSide && index > 0) ||
+				(!isLeftSide && index < tabElems.length - 1))
+		) {
+			tabsGap = tabElems[1].getBoundingClientRect().left - firstRect.right
 		}
 
 		if (closestTab) {
 			const tabRect = closestTab.getBoundingClientRect()
-			const newLeft = isLeftSide ? tabRect.left - 5 : tabRect.right + 1
+			const newLeft = isLeftSide
+				? tabRect.left - tabsGap + 1
+				: tabRect.right + 1
 			const newTop = tabRect.top
-			const newWidth = 4
+			const newWidth = tabsGap - 2
 			const newHeight = tabRect.height
 			const newArea = isLeftSide ? 'left' : 'right'
 
@@ -554,6 +568,7 @@ export const useDynamixLayout = ({
 	}
 
 	const onDragEnd = (e: React.DragEvent<HTMLDivElement>) => { // eslint-disable-line @typescript-eslint/no-unused-vars
+		document.body.style.cursor = 'default'
 		rootSplitHoverEl.current.forEach((el) => {
 			if (el) {
 				el.style.display = 'none'
@@ -623,6 +638,7 @@ export const useDynamixLayout = ({
 			requestAnimationFrame(() => {
 				updateTabsets(Node.cache.nodOpts.get())
 				updateSliders(Node.cache.bndOpts.get())
+				if (updateJSON) updateJSON(DynamixLayoutCore._root.toJSON())
 			})
 		}
 
@@ -650,10 +666,6 @@ export const useDynamixLayout = ({
 	const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
 		e.preventDefault()
 		e.stopPropagation()
-
-		if (e.dataTransfer) {
-			e.dataTransfer.getData('text/plain')
-		}
 	}
 
 	const updateActiveTab = (e: React.MouseEvent<HTMLElement>) => {
@@ -701,7 +713,7 @@ export const useDynamixLayout = ({
 			}
 		})
 
-		nodeOpts.nodKids?.forEach((kid) => {
+		nodeOpts.nodKids?.forEach((kid: NodeOptions) => {
 			if (kid.nodName == node.name) {
 				kid.nodOpen = true
 				tabsRef.current
@@ -740,6 +752,7 @@ export const useDynamixLayout = ({
 		Node.cache.bndOpts.triggerChange()
 		Node.cache.tabOpts.triggerChange()
 
+		if (updateJSON) updateJSON(DynamixLayoutCore._root.toJSON())
 		return () => {
 			window.removeEventListener('resize', handler)
 

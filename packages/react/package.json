@@ -45,7 +45,7 @@
 			"import": "./dist/index.es.js",
 			"require": "./dist/index.cjs.js"
 		},
-		"./style.css": "./dist/style.css"
+		"./style.css": "./dist/index.css"
 	},
 	"files": [
 		"dist",
@@ -88,7 +88,7 @@
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0",
 		"typescript": "^5.8.3",
-		"vite": "^7.0.4",
+		"vite": "^7.0.5",
 		"vite-plugin-dts": "^4.5.4",
 		"vite-plugin-lib-inject-css": "^2.2.2"
 	}

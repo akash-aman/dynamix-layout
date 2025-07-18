@@ -23,14 +23,10 @@ export default defineConfig({
 		environment: 'jsdom',
 		globals: true,
 		setupFiles: './src/test/setup.ts',
-		testTransformMode: { web: ['/\.[jt]sx?$/'] },
+		testTransformMode: { web: ['/[jt]sx?$/'] },
 		deps: {
-            inline: [
-                /@solidjs\/start/, 
-                /solid-js/
-            ],
-        },
-		
+			inline: [/@solidjs\/start/, /solid-js/],
+		},
 	},
 	plugins: [
 		solidPlugin(),
