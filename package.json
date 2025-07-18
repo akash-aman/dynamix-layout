@@ -43,7 +43,7 @@
 	},
 	"packageManager": "pnpm@10.13.1",
 	"engines": {
-		"node": ">=22.16.0"
-	},
-	"name": "@dynamix-layout/core"
+		"node": ">=22.16.0",
+		"pnpm": ">=10.13.1"
+	}
 }

@@ -62,7 +62,8 @@
 	},
 	"type": "module",
 	"engines": {
-		"node": ">=22.16.0"
+		"node": ">=22.16.0",
+		"pnpm": ">=10.13.1"
 	},
 	"scripts": {
 		"dev": "vite build --watch",
