@@ -2,6 +2,7 @@ import Editor from './components/Editor'
 import { Terminal } from './components/Terminal'
 import { DynamixLayout } from '@dynamix-layout/react'
 import { IframePreview } from './components/IframePreview'
+import '@dynamix-layout/react/style.css'
 import './App.css'
 
 import {
@@ -220,6 +221,7 @@ function App() {
 							},
 						],
 					}}
+					updateJSON={layoutTree => console.log(layoutTree)}
 					pad={{ t: 0, b: 0, l: 0, r: 0 }}
 					SliderElement={DefaultSliderElement}
 					HoverElement={DefaultHoverElement}

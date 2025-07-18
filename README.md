@@ -34,10 +34,10 @@ Dynamix Layout is a powerful JavaScript library designed to help you build compl
 
 ---
 
-
 ### Made with ❤️ by [Akash Aman](https://linktr.ee/akash_aman)
 
 ---
+
 <p align="center">
 	<a href="https://dynamix-layout-shadcn.vercel.app" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
 		<img src="https://img.shields.io/badge/🌐%20Live%20Demo-Visit%20Now-4CAF50?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo"/>
@@ -73,9 +73,26 @@ The core, framework-agnostic layout engine. It handles all the complex logic of 
 
 ### │ 🚀 @dynamix-layout/react
 
-The official React component library for Dynamix Layout. It provides a simple-to-use `<Layout />` component and an advanced `useLayout` hook that handles all the rendering, state management, and event binding for you. This is the recommended package for all React developers.
+The official React component library for Dynamix Layout. It provides a simple-to-use `<DynamixLayout />` component and an advanced `useDynamixLayout` hook that handles all the rendering, state management, and event binding for you. This is the recommended package for all React developers.
 
 ➡️ **[View the detailed `@dynamix-layout/react` README](./packages/react/README.md)**
+
+### │ 🚀 @dynamix-layout/solid
+
+The official SolidJS wrapper for `@dynamix-layout/core`. It provides a flexible `<DynamixLayout />` component and an advanced `useDynamixLayout` hook to create fully dynamic, resizable, and draggable tab-based layouts with ease.
+
+➡️ **[View the detailed `@dynamix-layout/solid` README](./packages/solid/README.md)**
+
+---
+
+## 📖 Examples
+
+This repository contains the following examples:
+
+- [Next.js](./examples/nextjs)
+- [React](./examples/react)
+- [Solid](./examples/solid)
+- [SolidStart](./examples/solidstart)
 
 ---
 
@@ -87,6 +104,12 @@ For React applications, you will need both the `react` and `core` packages.
 npm install @dynamix-layout/react @dynamix-layout/core
 ```
 
+For Solid applications, you will need both the `solid` and `core` packages.
+
+```bash
+npm install @dynamix-layout/solid @dynamix-layout/core
+```
+
 ---
 
 ## 🏁 Basic Usage
@@ -94,55 +117,41 @@ npm install @dynamix-layout/react @dynamix-layout/core
 Here's how easy it is to get started with the React component:
 
 ```jsx
-import React from 'react'
 import { DynamixLayout } from '@dynamix-layout/react'
+import '@dynamix-layout/react/style.css'
 
 function App() {
-	const myTabs = [
-		[
-			'editor',
-			<div
-				style={{
-					background: '#c0ca33',
-					height: '100%',
-				}}
-			>
-				Editor
-			</div>,
-		],
-		[
-			'preview',
-			<div
-				style={{
-					background: '#66bb6a',
-					height: '100%',
-				}}
-			>
-				Preview
-			</div>,
-		],
-		[
-			'terminal',
-			<div
-				style={{
-					background: '#ffc400',
-					height: '100%',
-				}}
-			>
-				Terminal
-			</div>,
-		],
+
+	const tabList = [
+		['editor', <div style={{ background: '#c0ca33', height: '100%' }}>Editor</div>],
+		['preview', <div style={{ background: '#66bb6a', height: '100%' }}>Preview</div>],
+		['terminal', <div style={{ background: '#ffc400', height: '100%' }}>Terminal</div>],
 	]
 
 	return (
-		<div
-			style={{
-				height: '100vh',
-				width: '100vw',
-			}}
-		>
-			<DynamixLayout tabs={myTabs} />
-		</div>
+		<DynamixLayout tabs={tabList} style={{ height: '100vh', width: '100vw' }} />
+	)
+}
+
+export default App
+```
+
+Here's how easy it is to get started with the SolidJS component:
+
+```jsx
+import { DynamixLayout } from '@dynamix-layout/solid'
+import '@dynamix-layout/solid/style.css'
+
+function App() {
+
+	const tabList = [
+		['editor', <div style={{ background: '#c0ca33', height: '100%' }}>Editor</div>],
+		['preview', <div style={{ background: '#66bb6a', height: '100%' }}>Preview</div>],
+		['terminal', <div style={{ background: '#ffc400', height: '100%' }}>Terminal</div>],
+	];
+
+	return (
+		<DynamixLayout tabs={tabList} style={{ height: '100vh', width: '100vw' }} />
 	)
 }
 

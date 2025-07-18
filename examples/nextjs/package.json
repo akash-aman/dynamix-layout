@@ -1,0 +1,29 @@
+{
+	"name": "nextjs",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev -p 3013 --turbopack",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"next": "15.4.1",
+		"react": "19.1.0",
+		"react-dom": "19.1.0"
+	},
+	"devDependencies": {
+		"@dynamix-layout/core": "workspace:*",
+		"@dynamix-layout/react": "workspace:*",
+		"@eslint/eslintrc": "^3.3.1",
+		"@tailwindcss/postcss": "^4.1.11",
+		"@types/node": "^24.0.14",
+		"@types/react": "^19.1.8",
+		"@types/react-dom": "^19.1.6",
+		"eslint": "^9.31.0",
+		"eslint-config-next": "15.4.1",
+		"tailwindcss": "^4.1.11",
+		"typescript": "^5.8.3"
+	}
+}

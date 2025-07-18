@@ -70,6 +70,6 @@
 		"@changesets/cli": "^2.29.5",
 		"@repo/eslint-config": "workspace:*",
 		"typescript": "^5.8.3",
-		"vite": "^7.0.4"
+		"vite": "^7.0.5"
 	}
 }

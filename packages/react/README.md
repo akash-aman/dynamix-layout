@@ -174,26 +174,32 @@ The hook returns an object with everything you need to build your UI, including:
 
 ### Example: Saving a Layout
 
-The `useLayout` hook is the best way to access the core `layoutInstance` to perform actions like saving the layout's state.
+- `updateJSON`: A callback function that receives the complete layout state object (LayoutTree) every time a change occurs (like dragging a tab or resizing a panel). You can use this to save the state to localStorage, a database, or anywhere else.
 
 ```jsx
-import React, { useCallback, useRef } from 'react'
-import { DynamixLayoutCore, Node } from '@dynamix-layout/core'
+import { tabs } from './comp'
+import { DynamixLayout } from '@dynamix-layout/react'
+import type { LayoutTree } from '@dynamix-layout/core'
+import '@dynamix-layout/solid/style.css'
 
-function MyCustomLayout() {
-	const handleSaveLayout = () => {
-		const layoutState = DynamixLayoutCore._root.toJSON()
-		localStorage.setItem('my-layout', JSON.stringify(layoutState))
-		console.log('Layout Saved!')
-	}
+function App() {
+
+	const UpdateJSON = (layoutTree: LayoutTree) => {
+		console.log(layoutTree);
+	};
 
 	return (
-		<div>
-			<button onClick={handleSaveLayout}>Save Layout</button>
-			{/* ...your custom rendering logic using `tabsets`... */}
-		</div>
+		<>
+			<DynamixLayout
+				updateJSON={UpdateJSON}
+				tabs={tabs}
+			/>
+		</>
 	)
 }
+
+export default App
+
 ```
 
 ---

@@ -2,7 +2,6 @@
 import { defineConfig } from 'vite'
 import { resolve } from 'path'
 import dts from 'vite-plugin-dts'
-import { libInjectCss } from 'vite-plugin-lib-inject-css'
 import { visualizer } from 'rollup-plugin-visualizer'
 import stripComments from 'vite-plugin-strip-comments'
 import fs from 'fs'
@@ -27,7 +26,22 @@ export default defineConfig({
 			},
 		},
 	},
+	plugins: [
+		dts({
+			outDir: 'dist/types',
+			exclude: ['node_modules/**', 'src/test/**'],
+			staticImport: true,
+		}),
+		visualizer({
+			filename: 'react.html',
+			gzipSize: true,
+			brotliSize: true,
+			template: 'treemap',
+		}),
+		stripComments({ type: 'none' }),
+	],
 	build: {
+		target: 'esnext',
 		sourcemap: 'hidden',
 		lib: {
 			entry: resolve(__dirname, 'src/index.ts'),
@@ -48,21 +62,6 @@ export default defineConfig({
 			},
 		},
 	},
-	plugins: [
-		dts({
-			outDir: 'dist/types',
-			exclude: ['node_modules/**', 'src/test/**'],
-			staticImport: true,
-		}),
-		libInjectCss(),
-		visualizer({
-			filename: 'react.html',
-			gzipSize: true,
-			brotliSize: true,
-			template: 'treemap',
-		}),
-		stripComments({ type: 'none' }),
-	],
 	resolve: {
 		preserveSymlinks: true,
 		alias: [
