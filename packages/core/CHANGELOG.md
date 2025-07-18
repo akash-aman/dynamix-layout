@@ -1,5 +1,12 @@
 # @dynamix-layout/core
 
+## 0.0.8
+
+### Patch Changes
+
+- [#52](https://github.com/akash-aman/dynamix-layout/pull/52) [`b6568bc`](https://github.com/akash-aman/dynamix-layout/commit/b6568bc6dac744ca18e066541b0306439b51738f) Thanks [@akash-aman](https://github.com/akash-aman)! - @dynamix-layout/core
+  • Removed unnecessary console logs & update dependency.
+
 ## 0.0.7
 
 ### Patch Changes

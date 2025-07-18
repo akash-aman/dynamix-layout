@@ -1,5 +1,19 @@
 # @dynamix-layout/react
 
+## 0.0.5
+
+### Patch Changes
+
+- [#52](https://github.com/akash-aman/dynamix-layout/pull/52) [`b6568bc`](https://github.com/akash-aman/dynamix-layout/commit/b6568bc6dac744ca18e066541b0306439b51738f) Thanks [@akash-aman](https://github.com/akash-aman)! - @dynamix-layout/react
+  • Fixed hover element rendering issue caused by hardcoded width.
+  • Improved default CSS styles.
+  • Added support for export & save layout as JSON via callback.
+  • Resolved TypeScript type issues.
+  • Included example projects for React and Next.js.
+- Updated dependencies [[`b6568bc`](https://github.com/akash-aman/dynamix-layout/commit/b6568bc6dac744ca18e066541b0306439b51738f)]:
+    - @dynamix-layout/core@0.0.8
+    - react@0.0.1
+
 ## 0.0.4
 
 ### Patch Changes
