@@ -1,5 +1,5 @@
 {
-	"name": "nextjs",
+	"name": "@repo/nextjs-example",
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {
@@ -10,7 +10,7 @@
 	},
 	"dependencies": {
 		"next": "15.4.1",
-		"react": "0.0.1",
+		"react": "19.1.0",
 		"react-dom": "19.1.0"
 	},
 	"devDependencies": {
