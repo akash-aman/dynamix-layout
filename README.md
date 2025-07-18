@@ -39,7 +39,7 @@ Dynamix Layout is a powerful JavaScript library designed to help you build compl
 ---
 
 <p align="center">
-	<a href="https://dynamix-layout-shadcn.vercel.app" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+	<a href="https://dx.xcode.cx" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
 		<img src="https://img.shields.io/badge/🌐%20Live%20Demo-Visit%20Now-4CAF50?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo"/>
 	</a>
 </p>

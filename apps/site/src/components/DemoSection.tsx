@@ -44,7 +44,7 @@ const DemoSection = () => {
 								className="hover:bg-primary/10"
 								onClick={() =>
 									window.open(
-										'https://dynamix-layout-shadcn.vercel.app/',
+										'https://dx.xcode.cx',
 										'_blank'
 									)
 								}
@@ -58,7 +58,7 @@ const DemoSection = () => {
 								className="hover:bg-primary/10"
 								onClick={() =>
 									window.open(
-										'https://dynamix-layout-shadcn.vercel.app/',
+										'https://dx.xcode.cx',
 										'_blank'
 									)
 								}
@@ -71,7 +71,7 @@ const DemoSection = () => {
 					{/* Iframe Container */}
 					<div className="relative">
 						<iframe
-							src="https://dynamix-layout-shadcn.vercel.app/"
+							src="https://dx.xcode.cx"
 							className="w-full h-[600px] md:h-[700px] lg:h-[800px] border-0"
 							title="Dynamix Layout Demo"
 							loading="lazy"
