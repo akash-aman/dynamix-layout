@@ -1,0 +1,92 @@
+{
+	"name": "@dynamix-layout/solid",
+	"version": "0.0.0",
+	"description": "A powerful SolidJS component for creating dynamic, resizable, and draggable layouts.",
+	"keywords": [
+		"solid",
+		"layout",
+		"resizable",
+		"draggable",
+		"split-layout",
+		"tabs",
+		"dynamic-layout",
+		"solid-layout",
+		"solid-component"
+	],
+	"author": "Akash Aman <sir.akashaman@gmail.com> (https://akash.cx)",
+	"funding": [
+		{
+			"type": "patreon",
+			"url": "https://www.patreon.com/akashaman"
+		},
+		{
+			"type": "buymeacoffee",
+			"url": "https://www.buymeacoffee.com/akashaman"
+		}
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/akashaman/dynamix-layout",
+		"directory": "packages/solid"
+	},
+	"bugs": {
+		"url": "https://github.com/akashaman/dynamix-layout/issues"
+	},
+	"homepage": "https://github.com/akashaman/dynamix-layout#readme",
+	"main": "./dist/index.cjs.js",
+	"module": "./dist/index.es.js",
+	"types": "./dist/types/index.d.ts",
+	"typings": "./dist/types/index.d.ts",
+	"style": "./dist/index.css",
+	"exports": {
+		".": {
+			"types": "./dist/types/index.d.ts",
+			"import": "./dist/index.es.js",
+			"require": "./dist/index.cjs.js"
+		},
+		"./style.css": "./dist/index.css"
+	},
+	"files": [
+		"dist",
+		"LICENSE",
+		"CHANGELOG.md",
+		"README.md",
+		"!**/*.map"
+	],
+	"sideEffects": [
+		"./dist/index.css"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"type": "module",
+	"engines": {
+		"node": ">=22.16.0"
+	},
+	"scripts": {
+		"dev": "vite build --watch",
+		"debug": "vite --debug",
+		"clean": "rm -rf dist",
+		"build": "pnpm run clean && vite build && cp ../../LICENSE dist/LICENSE",
+		"dev:local": "vite",
+		"preview": "vite preview",
+		"lint": "eslint . --ext ts,tsx",
+		"test": "vitest"
+	},
+	"license": "MIT",
+	"devDependencies": {
+		"@repo/eslint-config": "workspace:*",
+		"@repo/typescript-config": "workspace:*",
+		"@solidjs/testing-library": "^0.8.10",
+		"@testing-library/jest-dom": "^6.6.3",
+		"jsdom": "^26.1.0",
+		"typescript": "^5.8.3",
+		"vite": "^7.0.5",
+		"vite-plugin-solid": "2.11.7",
+		"vitest": "^3.2.4"
+	},
+	"dependencies": {
+		"solid-js": "^1.9.7",
+		"@dynamix-layout/core": "workspace:*"
+	}
+}

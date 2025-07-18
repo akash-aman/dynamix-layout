@@ -1,0 +1,28 @@
+/* This file contains all the necessary global CSS for the SolidJS components.
+  These rules cannot be applied as inline styles.
+*/
+
+/* --- Tab Label State --- */
+/* Controls the background color of the DefaultWrapTabLabel component based on its state. */
+.DefaultWrapTabLabel[data-state='active'] {
+  background-color: #ffffff;
+}
+
+.DefaultWrapTabLabel[data-state='inactive'] {
+  background-color: #dfdfdf;
+}
+
+/* --- Scrollbar Hiding --- */
+/* Hides the scrollbar for WebKit-based browsers (Chrome, Safari, Opera) 
+   in components using the 'hide-scrollbar' class. */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* --- Dragging State --- */
+/* Prevents child elements (like a text editor) inside DefaultWrapTabBody 
+   from capturing mouse events when a parent container has the 'is-dragging' class. 
+   This ensures smooth drag-and-drop behavior. */
+.is-dragging .DefaultWrapTabBody > * {
+  pointer-events: none;
+}

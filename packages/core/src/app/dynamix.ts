@@ -463,8 +463,6 @@ class Layout {
 				Node.cache.mapElem.set(leftKid.unId, leftKid)
 				Node.cache.mapElem.set(rghtKid.unId, rghtKid)
 
-				console.log(this.tabsIds)
-
 				break
 			}
 			const leftName = queue.dequeue()
