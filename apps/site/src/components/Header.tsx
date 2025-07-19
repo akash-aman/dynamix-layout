@@ -81,7 +81,7 @@ const Header = () => {
 							className="hidden sm:flex hover:bg-primary/10"
 							asChild
 						>
-							<a href="#demo">
+							<a href="#demo" title="Go to Demo section">
 								<ExternalLink className="w-4 h-4" />
 							</a>
 						</Button>

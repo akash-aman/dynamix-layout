@@ -231,6 +231,7 @@ const Footer = () => {
 								href="http://github.com/akash-aman/dynamix-layout"
 								target="_blank"
 								rel="noopener noreferrer"
+								title="GitHub Repository"
 							>
 								<Github className="w-4 h-4" />
 							</a>
@@ -245,6 +246,7 @@ const Footer = () => {
 								href="https://www.npmjs.com/org/dynamix-layout"
 								target="_blank"
 								rel="noopener noreferrer"
+								title="NPM Organization"
 							>
 								<ExternalLink className="w-4 h-4" />
 							</a>
@@ -259,6 +261,7 @@ const Footer = () => {
 								href="mailto:sir.akashaman@gmail.com"
 								target="_blank"
 								rel="noopener noreferrer"
+								title="Contact via Email"
 							>
 								<Mail className="w-4 h-4" />
 							</a>
