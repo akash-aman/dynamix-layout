@@ -23,6 +23,11 @@
 			"cache": false,
 			"persistent": true
 		},
+		"clean": {
+			"cache": false,
+			"persistent": true,
+			"outputs": []
+		},
 		"watch": {
 			"cache": false,
 			"persistent": true,

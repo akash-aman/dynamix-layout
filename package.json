@@ -10,6 +10,7 @@
 		"dev": "turbo run dev",
 		"lint": "turbo run lint",
 		"test": "vitest",
+		"clean": "turbo run clean",
 		"watch": "turbo run watch --parallel",
 		"format": "prettier --write \"**/*.{ts,tsx,md,json}\" --config ./prettier.config.mjs",
 		"version-packages": "changeset version",

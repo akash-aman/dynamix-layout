@@ -7,6 +7,9 @@
 </div>
 
 <p align="center">
+<a href="https://www.npmjs.com/package/@dynamix-layout/solid">
+<img src="https://img.shields.io/npm/v/@dynamix-layout/solid?style=for-the-badge&label=Solid" alt="NPM">
+</a>
 <a href="https://www.npmjs.com/package/@dynamix-layout/react">
 <img src="https://img.shields.io/npm/v/@dynamix-layout/react?style=for-the-badge&label=React" alt="NPM">
 </a>
