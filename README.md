@@ -89,10 +89,12 @@ The official SolidJS wrapper for `@dynamix-layout/core`. It provides a flexible 
 
 This repository contains the following examples:
 
-- [Next.js](./examples/nextjs)
-- [React](./examples/react)
-- [Solid](./examples/solid)
-- [SolidStart](./examples/solidstart)
+| Example        | Source Link                | Live Demo Link                |
+|----------------|---------------------------|-------------------------------|
+| React          | [React](./examples/react)         | [dx.xcode.cx](https://dx.xcode.cx)                    |
+| Next.js        | [Next.js](./examples/nextjs)      | [nextjs.dx.xcode.cx](https://nextjs.dx.xcode.cx)      |
+| SolidJS          | [SolidJS](./examples/solid)         | [solidjs.dx.xcode.cx](https://solidjs.dx.xcode.cx)    |
+| SolidStart     | [SolidStart](./examples/solidstart)| [solidstart.dx.xcode.cx](https://solidstart.dx.xcode.cx) |
 
 ---
 
