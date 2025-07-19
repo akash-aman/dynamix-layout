@@ -41,6 +41,11 @@
 		"vite-plugin-strip-comments": "^0.0.6",
 		"vitest": "^3.2.4"
 	},
+	"pnpm": {
+		"overrides": {
+			"prismjs": "^1.30.0"
+		}
+	},
 	"packageManager": "pnpm@10.13.1",
 	"engines": {
 		"node": "^22.0.0",
