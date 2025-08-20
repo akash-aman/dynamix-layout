@@ -22,6 +22,19 @@ const DemoSection = () => {
 					</p>
 				</div>
 
+				{/* YouTube Video */}
+				<div className="flex justify-center mb-12">
+					<iframe
+						className="w-full h-[600px] md:h-[700px] lg:h-[800px] border-0"
+						src="https://www.youtube.com/embed/cslV7CTwf-8?si=YjdPrFG1eVVgBLJA"
+						title="YouTube video player"
+						frameBorder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+						referrerPolicy="strict-origin-when-cross-origin"
+						allowFullScreen
+					></iframe>
+				</div>
+
 				{/* Demo Container */}
 				<Card className="relative bg-card/50 backdrop-blur-sm border-primary/20 overflow-hidden shadow-card">
 					{/* Demo Header */}
