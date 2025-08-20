@@ -48,7 +48,7 @@ importers:
         specifier: ^16.3.0
         version: 16.3.0
       jest:
-        specifier: ^30.0.5
+        specifier: ^30.0.4
         version: 30.0.5(@types/node@24.0.14)
       jsdom:
         specifier: ^26.1.0
@@ -6035,8 +6035,8 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
-  napi-postinstall@0.3.1:
-    resolution: {integrity: sha512-is9eGpjKpRg+Z7ECny6NSOekea7+1eTs9+jTt5jJx43ez0o1BYRUKEBIf+ZZn15oQf5wvPnRf0Uat6MAtvVz+A==}
+  napi-postinstall@0.3.3:
+    resolution: {integrity: sha512-uTp172LLXSxuSYHv/kou+f6KW3SMppU9ivthaVTXian9sOt3XM/zHYHpRZiLgQoxeWfYUnslNWQHF1+G71xcow==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
     hasBin: true
 
@@ -14202,7 +14202,7 @@ snapshots:
 
   nanoid@3.3.11: {}
 
-  napi-postinstall@0.3.1: {}
+  napi-postinstall@0.3.3: {}
 
   natural-compare@1.4.0: {}
 
@@ -15967,7 +15967,7 @@ snapshots:
 
   unrs-resolver@1.11.1:
     dependencies:
-      napi-postinstall: 0.3.1
+      napi-postinstall: 0.3.3
     optionalDependencies:
       '@unrs/resolver-binding-android-arm-eabi': 1.11.1
       '@unrs/resolver-binding-android-arm64': 1.11.1
