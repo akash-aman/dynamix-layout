@@ -1,5 +1,13 @@
 # solidstart
 
+## 0.0.2
+
+### Patch Changes
+
+- Updated dependencies [[`416172e`](https://github.com/akash-aman/dynamix-layout/commit/416172e03da7e7916c160409996a23189dedc588)]:
+    - @dynamix-layout/solid@1.0.0
+    - @dynamix-layout/core@1.0.0
+
 ## 0.0.1
 
 ### Patch Changes
