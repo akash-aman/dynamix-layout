@@ -1,5 +1,11 @@
 # @dynamix-layout/core
 
+## 1.0.1
+
+### Patch Changes
+
+- Fix security vulnerabilities in transitive dependencies via pnpm overrides and dependency bumps
+
 ## 1.0.0
 
 ### Major Changes

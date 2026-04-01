@@ -2,7 +2,7 @@
 	"name": "@repo/solidstart-example",
 	"type": "module",
 	"private": true,
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"scripts": {
 		"dev": "vinxi dev",
 		"build": "vinxi build",
@@ -14,9 +14,9 @@
 		"@dynamix-layout/solid": "workspace:*",
 		"@solidjs/meta": "^0.29.4",
 		"@solidjs/router": "^0.15.3",
-		"@solidjs/start": "^1.1.7",
+		"@solidjs/start": "^1.2.0",
 		"solid-js": "^1.9.7",
-		"vinxi": "^0.5.8"
+		"vinxi": "^0.5.11"
 	},
 	"packageManager": "pnpm@10.13.1",
 	"engines": {
