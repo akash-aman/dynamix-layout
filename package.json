@@ -44,7 +44,17 @@
 	},
 	"pnpm": {
 		"overrides": {
-			"prismjs": "^1.30.0"
+			"prismjs": "^1.30.0",
+			"rollup": ">=4.59.0",
+			"picomatch": ">=4.0.4",
+			"serialize-javascript": ">=7.0.5",
+			"node-forge": ">=1.4.0",
+			"yaml": ">=2.8.3",
+			"flatted": ">=3.4.2",
+			"tar": ">=7.5.11",
+			"minimatch": ">=3.1.4",
+			"brace-expansion": ">=2.0.3",
+			"h3": ">=1.15.9"
 		}
 	},
 	"packageManager": "pnpm@10.13.1",
